@@ -1,146 +1,106 @@
 
-document.addEventListener("DOMContentLoaded", () => {
-  const menuToggle = document.getElementById("menuToggle");
-  const navMenu = document.getElementById("navMenu");
-  const filterButtons = document.querySelectorAll(".filter-btn");
-  const menuCards = document.querySelectorAll(".menu-card");
-  const emptyMessage = document.getElementById("emptyMessage");
-  const toast = document.getElementById("toast");
-  const backToTop = document.getElementById("backToTop");
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
 
-  let activeFilter = "all";
-  let toastTimer;
-
-  // نمایش پیام زیبا در پایین صفحه
-  function showToast(message) {
-    toast.textContent = message;
-    toast.classList.add("show");
-
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => {
-      toast.classList.remove("show");
-    }, 2600);
-  }
-
-  // منوی موبایل
-  menuToggle.setAttribute("aria-expanded", "false");
-
-  menuToggle.addEventListener("click", () => {
-    const opened = navMenu.classList.toggle("open");
-
-    menuToggle.textContent = opened ? "✕" : "☰";
-    menuToggle.setAttribute("aria-expanded", String(opened));
-  });
-
-  navMenu.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", () => {
-      navMenu.classList.remove("open");
-      menuToggle.textContent = "☰";
-      menuToggle.setAttribute("aria-expanded", "false");
-    });
-  });
-
-  // فیلتر کردن منوی کافه
-  function filterMenu(category) {
-    activeFilter = category;
-    let visibleItems = 0;
-
-    menuCards.forEach(card => {
-      const matches =
-        category === "all" || card.dataset.category === category;
-
-      card.hidden = !matches;
-
-      if (matches) visibleItems++;
-    });
-
-    filterButtons.forEach(button => {
-      const active = button.dataset.filter === category;
-
-      button.classList.toggle("active", active);
-      button.setAttribute("aria-pressed", String(active));
-    });
-
-    emptyMessage.hidden = visibleItems !== 0;
-  }
-
-  filterButtons.forEach(button => {
-    button.setAttribute(
-      "aria-pressed",
-      String(button.classList.contains("active"))
-    );
-
-    button.addEventListener("click", () => {
-      filterMenu(button.dataset.filter);
-    });
-  });
-
-  // سفارش نمایشی
-  const orders = [];
-
-  document.querySelectorAll(".order-btn").forEach(button => {
-    button.addEventListener("click", () => {
-      const productName = button.dataset.name;
-      orders.push(productName);
-
-      button.textContent = "✓ اضافه شد";
-
-      showToast(`🍓 ${productName} به سفارش نمایشی تو اضافه شد!`);
-
-      setTimeout(() => {
-        button.textContent = "+ سفارش";
-      }, 1200);
-    });
-  });
-
-  // فرم خبرنامه؛ بدون ارسال واقعی ایمیل
-  const newsletterForm = document.getElementById("newsletterForm");
-  const emailInput = document.getElementById("emailInput");
-  const newsletterMessage =
-    document.getElementById("newsletterMessage");
-
-  newsletterForm.addEventListener("submit", event => {
-    event.preventDefault();
-
-    if (!emailInput.checkValidity()) {
-      emailInput.reportValidity();
-      return;
-    }
-
-    newsletterMessage.textContent =
-      "چه عالی! 💌 فرم نمایشی با موفقیت تکمیل شد.";
-
-    newsletterForm.reset();
-  });
-
-  // دکمه بازگشت به بالا
-  window.addEventListener("scroll", () => {
-    backToTop.classList.toggle("visible", window.scrollY > 350);
-  }, { passive: true });
-
-  backToTop.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  });
-
-  // نمایش نرم بخش‌ها هنگام ورود به صفحه
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in-view");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll(
-      ".features > div, .menu-card, .story-copy, .gallery-grid img"
-    ).forEach(element => observer.observe(element));
-  }
-
-  // شروع با نمایش تمام آیتم‌ها
-  filterMenu(activeFilter);
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+  menuToggle.setAttribute(
+    'aria-expanded',
+    navLinks.classList.contains('open')
+  );
 });
+
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => navLinks.classList.remove('open'));
+});
+
+// فیلتر محصولات
+const filters = document.querySelectorAll('.filter');
+const products = document.querySelectorAll('.product-card');
+
+filters.forEach(button => {
+  button.addEventListener('click', () => {
+    filters.forEach(item => item.classList.remove('active'));
+    button.classList.add('active');
+
+    const category = button.dataset.filter;
+
+    products.forEach(product => {
+      const show = category === 'all' ||
+        product.dataset.category === category;
+
+      product.classList.toggle('hidden', !show);
+    });
+  });
+});
+
+// سبد خرید نمایشی
+let cart = [];
+
+const cartStatus = document.getElementById('cart-status');
+const toast = document.getElementById('toast');
+let toastTimer;
+
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+
+  toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2400);
+}
+
+document.querySelectorAll('.add-button').forEach(button => {
+  button.addEventListener('click', () => {
+    cart.push(button.dataset.name);
+    cartStatus.textContent =
+      `سبدت ${cart.length} آیتم داره ♡ ${cart.join('، ')}`;
+
+    showToast(`🍓 ${button.dataset.name} به سبدت اضافه شد!`);
+  });
+});
+
+// فرم خبرنامه؛ نمایشی و بدون ارسال واقعی
+document.getElementById('newsletter-form').addEventListener('submit', event => {
+  event.preventDefault();
+
+  const email = document.getElementById('email').value;
+  document.getElementById('newsletter-status').textContent =
+    `ممنون از همراهیت ♡ (دموی سایت برای ${email})`;
+
+  event.target.reset();
+});
+
+// دکمه بازگشت به بالا
+const backTop = document.getElementById('back-top');
+
+window.addEventListener('scroll', () => {
+  backTop.classList.toggle('visible', window.scrollY > 400);
+});
+
+backTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// انیمیشن ورود بخش‌ها هنگام اسکرول
+const animatedItems = document.querySelectorAll(
+  '.product-card, .perks > div, .story, .gallery-grid img, .section-heading'
+);
+
+animatedItems.forEach(item => item.classList.add('reveal'));
+
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  animatedItems.forEach(item => observer.observe(item));
+} else {
+  animatedItems.forEach(item => item.classList.add('in-view'));
+}
