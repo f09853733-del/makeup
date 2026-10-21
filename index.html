@@ -4,239 +4,150 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Strawberry Cafe - کافه صورتی، دنیای قهوه و دسرهای خوشمزه">
-  <title>STRAWBERRY CAFÉ | کافه صورتی</title>
-
+  <title>Pink Café | کافه صورتی</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
 </head>
 <body>
-
-  <div class="topbar">🍓 یه روز شیرین، با یه فنجون عشق شروع می‌شه!</div>
+  <div class="announcement">🎀 یک فنجان عشق، یک عالمه حال خوب!</div>
 
   <header class="navbar">
-    <a class="logo" href="#home">STRAWBERRY <span>CAFÉ</span> 🍓</a>
-    <button class="menu-toggle" id="menuToggle" aria-label="باز کردن منو">☰</button>
-
-    <nav id="navMenu">
+    <a href="#" class="logo">☕ Pink Café <span>♥</span></a>
+    <button class="menu-toggle" aria-label="باز کردن منو">☰</button>
+    <nav class="nav-links">
       <a href="#home">خانه</a>
-      <a href="#menu">منوی کافه</a>
+      <a href="#menu">منوی خوشمزه</a>
       <a href="#story">داستان ما</a>
       <a href="#gallery">گالری</a>
     </nav>
-
-    <a class="nav-cta" href="#menu">منو رو ببین ♡</a>
+    <a class="nav-button" href="#menu">دیدن منو ♡</a>
   </header>
 
   <main>
     <section class="hero" id="home">
-      <div class="hero-copy">
-        <span class="eyebrow">A LITTLE CUP OF HAPPINESS</span>
-        <h1>زندگی شیرین‌تره<br>با یه ذره <span>توت‌فرنگی!</span></h1>
-        <p>
-          به کافه صورتی ما خوش اومدی؛
-          جایی برای قهوه‌های خوش‌عطر، کیک‌های دوست‌داشتنی
-          و لحظه‌هایی که دلت می‌خواد کششون بدی.
-        </p>
+      <div class="hero-content">
+        <span class="eyebrow">YOUR LITTLE HAPPY PLACE ✿</span>
+        <h1>یه ذره قهوه،<br><span>یه عالمه عشق!</span></h1>
+        <p>به دنیای صورتی ما خوش اومدی؛ جایی برای قهوه‌های خوش‌عطر، دسرهای رؤیایی و لحظه‌هایی که دلت می‌خواد متوقف بشن.</p>
         <div class="hero-buttons">
-          <a class="btn btn-primary" href="#menu">کشف منوی خوشمزه 🍰</a>
-          <a class="btn btn-outline" href="#story">داستان کافه ما</a>
+          <a class="button primary" href="#menu">منوی خوشمزه 🍓</a>
+          <a class="button secondary" href="#story">قصه کافه ما</a>
         </div>
-        <div class="hero-caption">
-          <span class="mini-strawberry">🍓</span>
-          <span>تازه، خوشمزه، با کلی عشق درست شده!</span>
-        </div>
+        <div class="hero-note">♡ Made with love, coffee & strawberries</div>
       </div>
-
-      <div class="hero-art">
-        <div class="pink-circle"></div>
-        <div class="hero-image">
-          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1000&q=85" alt="کیک خوشمزه کافه" fetchpriority="high">
-        </div>
-        <div class="floating-note note-one">🍓<span>Berry sweet!</span></div>
-        <div class="floating-note note-two">♡ Made with love ♡</div>
-        <span class="deco deco-one">✦</span>
-        <span class="deco deco-two">♡</span>
-        <span class="deco deco-three">✿</span>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=85" alt="قهوه و فضای گرم کافه">
+        <div class="floating-card">♡ حال خوب از همین‌جا شروع می‌شه</div>
+        <span class="sparkle sparkle-one">✦</span>
+        <span class="sparkle sparkle-two">♡</span>
       </div>
-      <div class="hero-bottom">SWEET MOMENTS · PRETTY DRINKS · HAPPY HEARTS</div>
     </section>
 
-    <section class="features">
-      <div><span>☕</span><strong>قهوه تازه</strong><small>Freshly brewed</small></div>
-      <div><span>🍰</span><strong>دسرهای خونگی</strong><small>Homemade treats</small></div>
-      <div><span>🌷</span><strong>فضای دوست‌داشتنی</strong><small>A cozy little place</small></div>
-      <div><span>💗</span><strong>ساخته‌شده با عشق</strong><small>Made with love</small></div>
+    <section class="perks">
+      <div><span>☕</span><h3>قهوه‌های خاص</h3><p>با عطر و طعم فراموش‌نشدنی</p></div>
+      <div><span>🍰</span><h3>دسرهای رؤیایی</h3><p>شیرین مثل لحظه‌های خوب</p></div>
+      <div><span>🌷</span><h3>فضای دلبرانه</h3><p>برای قرارهای قشنگ تو</p></div>
+      <div><span>♡</span><h3>پر از عشق</h3><p>جزئیات کوچیک، حس بزرگ</p></div>
     </section>
 
     <section class="menu-section section" id="menu">
       <div class="section-heading">
-        <span class="eyebrow">A MENU FULL OF LOVE</span>
-        <h2>یه چیزی خوشمزه <span>انتخاب کن!</span></h2>
-        <p>از قهوه‌های پرانرژی تا دسرهای صورتی و شیرین.</p>
+        <span class="eyebrow">A LITTLE TASTE OF HAPPINESS</span>
+        <h2>خوشمزه‌های <span>محبوب ما</span> 🍓</h2>
+        <p>هر کدوم یه بهونه برای لبخند زدن!</p>
       </div>
 
       <div class="filters">
-        <button class="filter-btn active" data-filter="all">همه خوشمزه‌ها</button>
-        <button class="filter-btn" data-filter="coffee">قهوه ☕</button>
-        <button class="filter-btn" data-filter="drink">نوشیدنی 🥤</button>
-        <button class="filter-btn" data-filter="dessert">دسر 🍰</button>
+        <button class="filter active" data-filter="all">همه</button>
+        <button class="filter" data-filter="coffee">قهوه</button>
+        <button class="filter" data-filter="dessert">دسر</button>
+        <button class="filter" data-filter="drink">نوشیدنی</button>
       </div>
 
-      <div class="menu-grid" id="menuGrid">
-
-        <article class="menu-card" data-category="drink" data-name="استرابری ماچا">
-          <div class="food-image">
-            <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=700&q=80" alt="نوشیدنی خنک و رنگی" loading="lazy">
-            <span class="food-label">GIRL FAVORITE</span>
+      <div class="product-grid">
+        <article class="product-card" data-category="coffee">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=700&q=85" alt="لاته خامه‌ای">
+            <span class="product-tag">محبوب ♡</span>
           </div>
-          <div class="food-info">
-            <span class="food-emoji">🍓</span>
-            <h3>استرابری ماچا</h3>
-            <p>ترکیب لطیف ماچا و طعم توت‌فرنگی</p>
-            <div class="food-bottom"><strong>۲۴۰٬۰۰۰ تومان</strong><button class="order-btn" data-name="استرابری ماچا">+ سفارش</button></div>
-          </div>
+          <div class="product-info"><h3>لاته صورتی</h3><p>نرم، لطیف و خوش‌عطر</p><div class="product-bottom"><b>۱۸۰ هزار تومان</b><button class="add-button" data-name="لاته صورتی">+ افزودن</button></div></div>
         </article>
 
-        <article class="menu-card" data-category="coffee" data-name="آیس لاته">
-          <div class="food-image">
-            <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=700&q=80" alt="آیس لاته" loading="lazy">
-            <span class="food-label">COFFEE TIME</span>
+        <article class="product-card" data-category="dessert">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=85" alt="کیک شکلاتی">
+            <span class="product-tag">دسر رؤیایی</span>
           </div>
-          <div class="food-info">
-            <span class="food-emoji">☕</span>
-            <h3>آیس لاته</h3>
-            <p>اسپرسو، شیر خنک و کلی حس خوب</p>
-            <div class="food-bottom"><strong>۱۹۰٬۰۰۰ تومان</strong><button class="order-btn" data-name="آیس لاته">+ سفارش</button></div>
-          </div>
+          <div class="product-info"><h3>کیک شکلاتی</h3><p>یک تکه شادی با شکلات</p><div class="product-bottom"><b>۲۲۰ هزار تومان</b><button class="add-button" data-name="کیک شکلاتی">+ افزودن</button></div></div>
         </article>
 
-        <article class="menu-card" data-category="dessert" data-name="کیک توت‌فرنگی">
-          <div class="food-image">
-            <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=700&q=80" alt="کیک توت‌فرنگی" loading="lazy">
-            <span class="food-label">SWEET DREAM</span>
+        <article class="product-card" data-category="drink">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=700&q=85" alt="نوشیدنی خنک میوه‌ای">
+            <span class="product-tag">خنک و خوشمزه</span>
           </div>
-          <div class="food-info">
-            <span class="food-emoji">🍰</span>
-            <h3>کیک توت‌فرنگی</h3>
-            <p>کیک نرم با خامه لطیف و توت‌فرنگی</p>
-            <div class="food-bottom"><strong>۲۲۰٬۰۰۰ تومان</strong><button class="order-btn" data-name="کیک توت‌فرنگی">+ سفارش</button></div>
-          </div>
+          <div class="product-info"><h3>اسموتی توت‌فرنگی</h3><p>خنک، میوه‌ای و دلبر</p><div class="product-bottom"><b>۱۹۰ هزار تومان</b><button class="add-button" data-name="اسموتی توت‌فرنگی">+ افزودن</button></div></div>
         </article>
 
-        <article class="menu-card" data-category="drink" data-name="لیموناد صورتی">
-          <div class="food-image">
-            <img src="https://images.unsplash.com/photo-1513558161293-cdaf765edfd7?auto=format&fit=crop&w=700&q=80" alt="نوشیدنی خنک میوه‌ای" loading="lazy">
-            <span class="food-label">FRESH & CUTE</span>
+        <article class="product-card" data-category="dessert">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=700&q=85" alt="دسر خامه‌ای">
+            <span class="product-tag">انتخاب شیرین</span>
           </div>
-          <div class="food-info">
-            <span class="food-emoji">🍋</span>
-            <h3>لیموناد صورتی</h3>
-            <p>ترش و شیرین، خنک و پر از طراوت</p>
-            <div class="food-bottom"><strong>۱۷۰٬۰۰۰ تومان</strong><button class="order-btn" data-name="لیموناد صورتی">+ سفارش</button></div>
-          </div>
+          <div class="product-info"><h3>دسر توت‌فرنگی</h3><p>یه قاشق پر از عشق</p><div class="product-bottom"><b>۱۶۰ هزار تومان</b><button class="add-button" data-name="دسر توت‌فرنگی">+ افزودن</button></div></div>
         </article>
-
-        <article class="menu-card" data-category="coffee" data-name="کاپوچینو">
-          <div class="food-image">
-            <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=700&q=80" alt="فنجان کاپوچینو" loading="lazy">
-            <span class="food-label">CLASSIC LOVE</span>
-          </div>
-          <div class="food-info">
-            <span class="food-emoji">🤎</span>
-            <h3>کاپوچینو</h3>
-            <p>قهوه خوش‌عطر با فوم شیر لطیف</p>
-            <div class="food-bottom"><strong>۱۸۰٬۰۰۰ تومان</strong><button class="order-btn" data-name="کاپوچینو">+ سفارش</button></div>
-          </div>
-        </article>
-
-        <article class="menu-card" data-category="dessert" data-name="کاپ‌کیک صورتی">
-          <div class="food-image">
-            <img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=700&q=80" alt="کاپ‌کیک‌های رنگی" loading="lazy">
-            <span class="food-label">CUTE ALERT</span>
-          </div>
-          <div class="food-info">
-            <span class="food-emoji">🧁</span>
-            <h3>کاپ‌کیک صورتی</h3>
-            <p>یه کیک کوچولو برای یه لبخند بزرگ</p>
-            <div class="food-bottom"><strong>۱۵۰٬۰۰۰ تومان</strong><button class="order-btn" data-name="کاپ‌کیک صورتی">+ سفارش</button></div>
-          </div>
-        </article>
-
       </div>
-      <p id="emptyMessage" class="empty-message" hidden>چیزی پیدا نشد؛ یه دسته دیگه رو امتحان کن! 🍓</p>
-      <p class="demo-note">قیمت‌ها و سفارش‌ها در این نمونه‌کار نمایشی هستند.</p>
-    </section>
-
-    <section class="quote-banner">
-      <span class="quote-strawberry">🍓</span>
-      <span class="eyebrow">LIFE IS BETTER WITH DESSERT</span>
-      <h2>کالری‌ها رو فراموش کن،<br><span>لحظه‌ات رو مزه کن!</span></h2>
-      <p>بعضی از بهترین خاطره‌ها با یه فنجون قهوه شروع می‌شن.</p>
-      <a href="#gallery" class="btn btn-primary">بیا یه چرخی بزن ♡</a>
-      <span class="quote-heart">♡</span>
+      <p class="cart-status" id="cart-status" aria-live="polite">هنوز چیزی به سبدت اضافه نکردی ♡</p>
     </section>
 
     <section class="story section" id="story">
       <div class="story-image">
-        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1000&q=85" alt="فضای دنج یک کافه" loading="lazy">
-        <span class="story-stamp">YOUR<br>HAPPY<br>PLACE ♡</span>
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1000&q=85" alt="فضای دنج و زیبای کافه">
       </div>
-      <div class="story-copy">
-        <span class="eyebrow">OUR LITTLE PINK WORLD</span>
-        <h2>یک گوشه دنج<br>برای <span>حال خوب تو</span></h2>
-        <p>
-          استرابری کافه، یک دنیای خیالی و شیرین برای دوست‌داران قهوه،
-          دسر و لحظه‌های قشنگ است. جایی که رنگ صورتی با عطر قهوه
-          همراه می‌شود و هر گوشه‌اش داستانی برای لبخند زدن دارد.
-        </p>
-        <a href="#menu" class="text-link">منوی کافه <span>←</span></a>
+      <div class="story-content">
+        <span class="eyebrow">A STORY BREWED WITH LOVE</span>
+        <h2>اینجا فقط کافه نیست،<br><span>یه حس قشنگه! ♡</span></h2>
+        <p>Pink Café برای اون لحظه‌های کوچیک ساخته شده؛ وقتی با دوستت می‌خندی، کتاب موردعلاقه‌ات رو می‌خونی یا فقط می‌خوای کمی به خودت برسی.</p>
+        <a href="#gallery" class="button primary">بیا یه نگاهی بندازیم 🌸</a>
       </div>
     </section>
 
     <section class="gallery section" id="gallery">
       <div class="section-heading">
-        <span class="eyebrow">LITTLE PINK MOMENTS</span>
-        <h2>گالری <span>لحظه‌های شیرین</span></h2>
-        <p>چند قاب خوشمزه از دنیای کافه ما.</p>
+        <span class="eyebrow">PINK MOMENTS</span>
+        <h2>گوشه‌ای از <span>دنیای ما</span> 🌷</h2>
+        <p>لحظه‌هایی به شیرینی یک فنجان قهوه</p>
       </div>
       <div class="gallery-grid">
-        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=700&q=80" alt="قهوه تازه" loading="lazy">
-        <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=700&q=80" alt="دسر خوشمزه" loading="lazy">
-        <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=700&q=80" alt="قهوه و کافه" loading="lazy">
-        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=80" alt="شیرینی تازه" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=700&q=85" alt="دسرهای شیرین">
+        <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=700&q=85" alt="فضای کافه">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=700&q=85" alt="خوراکی‌های خوشمزه">
+        <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=700&q=85" alt="یک گوشه دنج کافه">
       </div>
     </section>
 
     <section class="newsletter">
-      <div class="newsletter-icon">💌</div>
-      <h2>یه نامه شیرین برات داریم!</h2>
-      <p>ایمیلت رو وارد کن تا در این نمونه‌کار، پیام خوش‌آمدگویی ببینی.</p>
-      <form id="newsletterForm">
-        <input type="email" id="emailInput" placeholder="ایمیل تو..." required aria-label="ایمیل">
-        <button type="submit">عضو می‌شم ♡</button>
+      <span class="newsletter-heart">♡</span>
+      <h2>یه خبر شیرین برات داریم!</h2>
+      <p>برای دریافت خبرهای خوشمزه و پیشنهادهای صورتی، ایمیلت رو وارد کن.</p>
+      <form id="newsletter-form">
+        <input id="email" type="email" placeholder="ایمیل قشنگت رو بنویس..." required>
+        <button type="submit">عضوم کن ♡</button>
       </form>
-      <small id="newsletterMessage" aria-live="polite"></small>
+      <small id="newsletter-status" aria-live="polite"></small>
     </section>
   </main>
 
   <footer class="footer">
-    <a class="logo" href="#home">STRAWBERRY <span>CAFÉ</span> 🍓</a>
-    <p>با عشق، قهوه و کمی جادوی توت‌فرنگی ساخته شده ♡</p>
-    <div class="footer-links">
-      <a href="#home">خانه</a>
-      <a href="#menu">منو</a>
-      <a href="#story">داستان ما</a>
-      <a href="#gallery">گالری</a>
-    </div>
-    <small>© 2026 STRAWBERRY CAFÉ — Creative Portfolio Demo</small>
+    <a class="logo" href="#home">☕ Pink Café <span>♥</span></a>
+    <p>با عشق دم شده، برای لحظه‌های قشنگ تو.</p>
+    <div class="socials"><a href="#gallery">Instagram</a><a href="#menu">Our Menu</a><a href="#story">Our Story</a></div>
+    <small>© 2026 Pink Café · طراحی شده با عشق ♡</small>
   </footer>
 
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <button id="backToTop" aria-label="بازگشت به بالا">↑</button>
+  <div class="toast" id="toast" role="status"></div>
+  <button id="back-top" aria-label="بازگشت به بالا">↑</button>
+  <script src="script.js"></script>
 </body>
 </html>
