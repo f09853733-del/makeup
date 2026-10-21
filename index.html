@@ -4,255 +4,267 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#fff5f2">
-  <meta name="description" content="BEAUTY LAB — Discover your beauty, explore makeup looks and find your style.">
-  <title>BEAUTY LAB | Beauty, Makeup, You</title>
+  <meta name="description" content="BEAUTY BLOOM | دنیای زیبایی، آرایش و مراقبت از پوست">
+  <title>BEAUTY BLOOM | دنیای زیبایی</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
 
-  <div class="announcement" data-fa="زیبایی تو، داستان توست ✨" data-en="Your beauty, your story ✨">
-    زیبایی تو، داستان توست ✨
+  <div class="announcement">
+    ✨ به دنیای زیبایی خوش آمدی | زیبایی، به سبک خودت ✨
   </div>
 
-  <header class="header">
-    <a class="logo" href="#home">
-      BEAUTY LAB<span>✦</span>
-      <small>BEAUTY · MAKEUP · YOU</small>
-    </a>
+  <header class="navbar">
+    <a href="#home" class="logo">BEAUTY <span>BLOOM</span><i>✿</i></a>
 
-    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="باز کردن منو">☰</button>
 
-    <nav class="nav" id="nav">
-      <a href="#home" data-fa="خانه" data-en="Home">خانه</a>
-      <a href="#looks" data-fa="سبک‌های آرایش" data-en="Makeup Looks">سبک‌های آرایش</a>
-      <a href="#quiz" data-fa="آزمون زیبایی" data-en="Beauty Quiz">آزمون زیبایی</a>
-      <a href="#gallery" data-fa="گالری" data-en="Gallery">گالری</a>
-      <a href="#about" data-fa="درباره ما" data-en="About">درباره ما</a>
+    <nav id="navMenu">
+      <a href="#home">خانه</a>
+      <a href="#categories">دسته‌بندی</a>
+      <a href="#products">محصولات</a>
+      <a href="#about">درباره ما</a>
     </nav>
 
-    <div class="header-actions">
-      <button class="language-btn" id="languageToggle" aria-label="Switch language">EN</button>
-      <a class="icon-link" href="#favorites" aria-label="Favorites">♡</a>
+    <div class="nav-actions">
+      <button class="icon-btn" id="searchToggle" aria-label="جستجو">⌕</button>
+      <button class="icon-btn cart-btn" id="cartButton" aria-label="سبد خرید">
+        ♡ <span id="cartCount">0</span>
+      </button>
     </div>
   </header>
 
   <main>
     <section class="hero" id="home">
-      <div class="hero-image"></div>
-      <div class="hero-overlay"></div>
-
-      <div class="hero-content reveal">
-        <p class="eyebrow" data-fa="دنیای زیبایی تو" data-en="YOUR BEAUTY WORLD">دنیای زیبایی تو</p>
-        <h1 data-fa="زیبایی، به سبک <em>تو</em>" data-en="Beauty, in <em>your</em> style">
-          زیبایی، به سبک <em>تو</em>
-        </h1>
-        <p class="hero-description"
-           data-fa="الهام بگیر، سبک خودت را پیدا کن و در زیبایی بدرخش."
-           data-en="Get inspired, discover your style, and let your beauty shine.">
-          الهام بگیر، سبک خودت را پیدا کن و در زیبایی بدرخش.
+      <div class="hero-content">
+        <span class="eyebrow">YOUR DAILY DOSE OF BEAUTY ✨</span>
+        <h1>درخشش تو،<br>داستان <span>زیبایی توست!</span></h1>
+        <p>
+          دنیایی از رنگ، لطافت و زیبایی؛
+          جایی که محصولات مورد علاقه‌ات را کشف می‌کنی
+          و با استایل منحصربه‌فرد خودت می‌درخشی.
         </p>
 
         <div class="hero-buttons">
-          <a href="#looks" class="btn btn-primary" data-fa="کشف سبک‌ها ←" data-en="Explore Looks →">کشف سبک‌ها ←</a>
-          <a href="#quiz" class="btn btn-outline" data-fa="سبک من چیست؟" data-en="Find My Style">سبک من چیست؟</a>
+          <a href="#products" class="btn btn-primary">کشف محصولات ✧</a>
+          <a href="#categories" class="btn btn-light">دنیای زیبایی</a>
         </div>
 
         <div class="hero-note">
-          <span>✦</span>
-          <span data-fa="زیبایی بدون محدودیت" data-en="Beauty without limits">زیبایی بدون محدودیت</span>
+          <span>♡</span>
+          <div>
+            <strong>زیبایی، بدون محدودیت</strong>
+            <small>برای هر سلیقه، یک دنیای رنگی</small>
+          </div>
         </div>
       </div>
 
-      <div class="hero-side-note">BE YOUR OWN KIND OF BEAUTIFUL</div>
-    </section>
-
-    <section class="intro section-wrap reveal">
-      <p class="eyebrow" data-fa="الهام روز" data-en="DAILY INSPIRATION">الهام روز</p>
-      <h2 data-fa="زیبایی را دوباره کشف کن." data-en="Rediscover your beauty.">زیبایی را دوباره کشف کن.</h2>
-      <p data-fa="از آرایش طبیعی تا استایل‌های جسورانه؛ برای هر حال‌وهوایی یک ایده هست."
-         data-en="From natural makeup to bold statements, there's a look for every mood.">
-        از آرایش طبیعی تا استایل‌های جسورانه؛ برای هر حال‌وهوایی یک ایده هست.
-      </p>
-    </section>
-
-    <section class="looks section-wrap" id="looks">
-      <div class="section-heading reveal">
-        <div>
-          <p class="eyebrow" data-fa="انتخاب سردبیر" data-en="EDITOR'S PICKS">انتخاب سردبیر</p>
-          <h2 data-fa="استایل مورد علاقه‌ات را پیدا کن" data-en="Find Your Perfect Look">استایل مورد علاقه‌ات را پیدا کن</h2>
+      <div class="hero-visual">
+        <div class="hero-orbit"></div>
+        <div class="hero-photo">
+          <img
+            src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1000&q=85"
+            alt="محصولات آرایشی و زیبایی"
+          >
         </div>
-        <span class="heading-star">✦</span>
+        <div class="floating-card card-top">
+          <span>✿</span>
+          <div><strong>Glow up!</strong><small>وقت درخشیدنه</small></div>
+        </div>
+        <div class="floating-card card-bottom">
+          <span>♡</span>
+          <div><strong>Love yourself</strong><small>خودت را دوست داشته باش</small></div>
+        </div>
+        <span class="sparkle sparkle-one">✦</span>
+        <span class="sparkle sparkle-two">✧</span>
+        <span class="sparkle sparkle-three">✿</span>
       </div>
 
-      <div class="filter-bar" aria-label="Filter makeup looks">
-        <button class="filter-btn active" data-filter="all" data-fa="همه" data-en="All">همه</button>
-        <button class="filter-btn" data-filter="natural" data-fa="طبیعی" data-en="Natural">طبیعی</button>
-        <button class="filter-btn" data-filter="glam" data-fa="مجلسی" data-en="Glam">مجلسی</button>
-        <button class="filter-btn" data-filter="bold" data-fa="جسورانه" data-en="Bold">جسورانه</button>
-        <button class="filter-btn" data-filter="bridal" data-fa="عروس" data-en="Bridal">عروس</button>
+      <div class="hero-bottom">BEAUTY IS AN ATTITUDE — BLOOM EVERY DAY</div>
+    </section>
+
+    <section class="categories section" id="categories">
+      <div class="section-heading">
+        <span class="eyebrow">EXPLORE YOUR BEAUTY</span>
+        <h2>کدوم دنیای زیبایی <span>مال توئه؟</span></h2>
+        <p>محصول مورد علاقه‌ات را در دنیای رنگارنگ ما پیدا کن.</p>
       </div>
 
-      <div class="look-grid">
-        <article class="look-card reveal" data-category="natural">
-          <div class="look-image">
-            <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=850&q=85" alt="Natural beauty portrait" loading="lazy">
-            <span class="image-number">01</span>
-            <button class="favorite-btn" aria-label="Add Natural Glow to favorites">♡</button>
-            <span class="image-tag" data-fa="زیبایی طبیعی" data-en="NATURAL BEAUTY">زیبایی طبیعی</span>
-          </div>
-          <div class="look-info">
-            <div>
-              <h3 data-fa="درخشش طبیعی" data-en="Natural Glow">درخشش طبیعی</h3>
-              <p data-fa="ساده، تازه و بی‌زمان" data-en="Fresh, soft and timeless">ساده، تازه و بی‌زمان</p>
-            </div>
-            <button class="arrow-btn" aria-label="View Natural Glow" data-look="natural">↗</button>
-          </div>
-        </article>
+      <div class="category-grid">
+        <button class="category-card cat-pink" data-category="makeup">
+          <span class="category-emoji">💄</span>
+          <strong>آرایش و میکاپ</strong>
+          <small>Makeup Collection ↗</small>
+        </button>
 
-        <article class="look-card reveal" data-category="glam">
-          <div class="look-image">
-            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=850&q=85" alt="Elegant glamorous beauty portrait" loading="lazy">
-            <span class="image-number">02</span>
-            <button class="favorite-btn" aria-label="Add Soft Glam to favorites">♡</button>
-            <span class="image-tag" data-fa="شیک و درخشان" data-en="SOFT GLAM">شیک و درخشان</span>
-          </div>
-          <div class="look-info">
-            <div>
-              <h3 data-fa="گلم ملایم" data-en="Soft Glam">گلم ملایم</h3>
-              <p data-fa="ظرافت با جلوه‌ای خاص" data-en="Elegant with a little sparkle">ظرافت با جلوه‌ای خاص</p>
-            </div>
-            <button class="arrow-btn" aria-label="View Soft Glam" data-look="glam">↗</button>
-          </div>
-        </article>
+        <button class="category-card cat-purple" data-category="skincare">
+          <span class="category-emoji">🧴</span>
+          <strong>مراقبت از پوست</strong>
+          <small>Skincare Rituals ↗</small>
+        </button>
 
-        <article class="look-card reveal" data-category="bold">
-          <div class="look-image">
-            <img src="https://images.unsplash.com/photo-1512316609839-ce289d3eba0a?auto=format&fit=crop&w=850&q=85" alt="Bold editorial beauty look" loading="lazy">
-            <span class="image-number">03</span>
-            <button class="favorite-btn" aria-label="Add Bold Beauty to favorites">♡</button>
-            <span class="image-tag" data-fa="متفاوت و جسور" data-en="BOLD BEAUTY">متفاوت و جسور</span>
-          </div>
-          <div class="look-info">
-            <div>
-              <h3 data-fa="زیبایی جسورانه" data-en="Bold Beauty">زیبایی جسورانه</h3>
-              <p data-fa="برای وقتی که می‌خواهی بدرخشی" data-en="Make a statement">برای وقتی که می‌خواهی بدرخشی</p>
-            </div>
-            <button class="arrow-btn" aria-label="View Bold Beauty" data-look="bold">↗</button>
-          </div>
-        </article>
+        <button class="category-card cat-peach" data-category="fragrance">
+          <span class="category-emoji">🌸</span>
+          <strong>عطر و خوشبوکننده</strong>
+          <small>Lovely Scents ↗</small>
+        </button>
 
-        <article class="look-card reveal" data-category="bridal">
-          <div class="look-image">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=850&q=85" alt="Soft romantic beauty portrait" loading="lazy">
-            <span class="image-number">04</span>
-            <button class="favorite-btn" aria-label="Add Bridal Glow to favorites">♡</button>
-            <span class="image-tag" data-fa="رمانتیک و لطیف" data-en="BRIDAL GLOW">رمانتیک و لطیف</span>
-          </div>
-          <div class="look-info">
-            <div>
-              <h3 data-fa="درخشش عروس" data-en="Bridal Glow">درخشش عروس</h3>
-              <p data-fa="لطیف، رمانتیک و فراموش‌نشدنی" data-en="Romantic and unforgettable">لطیف، رمانتیک و فراموش‌نشدنی</p>
-            </div>
-            <button class="arrow-btn" aria-label="View Bridal Glow" data-look="bridal">↗</button>
-          </div>
-        </article>
+        <button class="category-card cat-blue" data-category="accessories">
+          <span class="category-emoji">🪞</span>
+          <strong>اکسسوری زیبایی</strong>
+          <small>Beauty Essentials ↗</small>
+        </button>
       </div>
     </section>
 
-    <section class="quiz-section" id="quiz">
-      <div class="quiz-photo">
-        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1000&q=85" alt="Makeup products and beauty essentials" loading="lazy">
-        <div class="photo-caption">
-          <span data-fa="آیین زیبایی تو" data-en="YOUR BEAUTY RITUAL">آیین زیبایی تو</span>
-          <strong>Make it yours ✦</strong>
+    <section class="products section" id="products">
+      <div class="section-heading">
+        <span class="eyebrow">A LITTLE BEAUTY MAGIC</span>
+        <h2>منتخب‌های <span>دوست‌داشتنی</span></h2>
+        <p>برای لحظه‌های کوچکی که حال دلت را زیباتر می‌کنند.</p>
+      </div>
+
+      <div class="product-toolbar">
+        <div class="filters" aria-label="فیلتر محصولات">
+          <button class="filter-btn active" data-filter="all">همه</button>
+          <button class="filter-btn" data-filter="makeup">آرایشی</button>
+          <button class="filter-btn" data-filter="skincare">پوستی</button>
+          <button class="filter-btn" data-filter="fragrance">عطر</button>
+          <button class="filter-btn" data-filter="accessories">اکسسوری</button>
+        </div>
+
+        <div class="search-box" id="searchBox">
+          <input id="searchInput" type="search" placeholder="جستجوی محصول..." aria-label="جستجوی محصول">
         </div>
       </div>
 
-      <div class="quiz-content">
-        <p class="eyebrow" data-fa="آزمون کوچک زیبایی" data-en="THE BEAUTY QUIZ">آزمون کوچک زیبایی</p>
-        <h2 data-fa="امروز چه حال‌وهوایی داری؟" data-en="What's your beauty mood today?">امروز چه حال‌وهوایی داری؟</h2>
-        <p data-fa="حالت را انتخاب کن تا یک استایل مناسب پیشنهاد بدهیم."
-           data-en="Choose your mood and discover a look that fits you.">
-          حالت را انتخاب کن تا یک استایل مناسب پیشنهاد بدهیم.
+      <div class="product-grid" id="productGrid">
+
+        <article class="product-card" data-category="makeup" data-name="رژلب صورتی رز">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=80" alt="رژلب آرایشی" loading="lazy">
+            <span class="product-tag">BESTSELLER</span>
+            <button class="favorite" aria-label="افزودن رژلب به علاقه‌مندی‌ها">♡</button>
+          </div>
+          <div class="product-info">
+            <span class="product-type">MAKEUP</span>
+            <h3>رژلب صورتی رز</h3>
+            <div class="product-bottom">
+              <span class="price">۴۵۰٬۰۰۰ تومان</span>
+              <button class="add-cart" data-product="رژلب صورتی رز" aria-label="افزودن به سبد خرید">+</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="skincare" data-name="سرم آبرسان">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=700&q=80" alt="محصول مراقبت از پوست" loading="lazy">
+            <span class="product-tag tag-new">NEW ✨</span>
+            <button class="favorite" aria-label="افزودن سرم به علاقه‌مندی‌ها">♡</button>
+          </div>
+          <div class="product-info">
+            <span class="product-type">SKINCARE</span>
+            <h3>سرم آبرسان</h3>
+            <div class="product-bottom">
+              <span class="price">۶۸۰٬۰۰۰ تومان</span>
+              <button class="add-cart" data-product="سرم آبرسان" aria-label="افزودن به سبد خرید">+</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="fragrance" data-name="عطر بلوم">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=700&q=80" alt="شیشه عطر" loading="lazy">
+            <span class="product-tag">LOVELY</span>
+            <button class="favorite" aria-label="افزودن عطر به علاقه‌مندی‌ها">♡</button>
+          </div>
+          <div class="product-info">
+            <span class="product-type">FRAGRANCE</span>
+            <h3>عطر بلوم</h3>
+            <div class="product-bottom">
+              <span class="price">۱٬۲۰۰٬۰۰۰ تومان</span>
+              <button class="add-cart" data-product="عطر بلوم" aria-label="افزودن به سبد خرید">+</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="accessories" data-name="براش آرایشی">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=700&q=80" alt="لوازم آرایش و براش" loading="lazy">
+            <span class="product-tag">GIRL FAVORITE</span>
+            <button class="favorite" aria-label="افزودن براش به علاقه‌مندی‌ها">♡</button>
+          </div>
+          <div class="product-info">
+            <span class="product-type">ACCESSORIES</span>
+            <h3>براش آرایشی</h3>
+            <div class="product-bottom">
+              <span class="price">۳۹۰٬۰۰۰ تومان</span>
+              <button class="add-cart" data-product="براش آرایشی" aria-label="افزودن به سبد خرید">+</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+      <p class="empty-message" id="emptyMessage" hidden>محصولی با این مشخصات پیدا نشد! ♡</p>
+    </section>
+
+    <section class="beauty-banner">
+      <div class="banner-decoration">✿</div>
+      <span class="eyebrow">A REMINDER FOR YOU</span>
+      <h2>تو همین حالا هم <span>زیبایی!</span></h2>
+      <p>محصولات می‌توانند درخشش تو را همراهی کنند؛ اما زیبایی از خود تو شروع می‌شود.</p>
+      <a href="#products" class="btn btn-primary">دنیای مورد علاقه‌ات را ببین ♡</a>
+      <span class="banner-star">✦</span>
+    </section>
+
+    <section class="about section" id="about">
+      <div class="about-visual">
+        <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=900&q=85" alt="مراقبت و زیبایی پوست" loading="lazy">
+        <div class="about-sticker">BE YOUR<br>OWN KIND<br>OF BEAUTIFUL ♡</div>
+      </div>
+      <div class="about-content">
+        <span class="eyebrow">A WORLD MADE WITH LOVE</span>
+        <h2>زیبایی یعنی<br><span>خودت بودن.</span></h2>
+        <p>
+          در BEAUTY BLOOM، زیبایی فقط به محصولات محدود نمی‌شود.
+          اینجا فضایی رنگی و دوست‌داشتنی برای کشف سلیقه،
+          مراقبت از خود و لذت بردن از لحظه‌های کوچک است.
         </p>
-
-        <div class="mood-options">
-          <button class="mood-btn" data-mood="natural"><span>♡</span><span data-fa="آرام و طبیعی" data-en="Calm & Natural">آرام و طبیعی</span></button>
-          <button class="mood-btn" data-mood="glam"><span>✦</span><span data-fa="شیک و درخشان" data-en="Confident & Glam">شیک و درخشان</span></button>
-          <button class="mood-btn" data-mood="bold"><span>✺</span><span data-fa="جسور و خلاق" data-en="Bold & Creative">جسور و خلاق</span></button>
-          <button class="mood-btn" data-mood="bridal"><span>♡</span><span data-fa="لطیف و رمانتیک" data-en="Romantic & Soft">لطیف و رمانتیک</span></button>
-        </div>
-
-        <div class="quiz-result" id="quizResult" aria-live="polite" hidden></div>
+        <a href="#categories" class="text-link">بیشتر کشف کن <span>←</span></a>
       </div>
     </section>
 
-    <section class="gallery-section section-wrap" id="gallery">
-      <div class="section-heading reveal">
-        <div>
-          <p class="eyebrow" data-fa="گالری زیبایی" data-en="THE BEAUTY GALLERY">گالری زیبایی</p>
-          <h2 data-fa="زیبایی در تمام جزئیات" data-en="Beauty in every detail">زیبایی در تمام جزئیات</h2>
-        </div>
-        <p class="gallery-intro" data-fa="الهام بگیر و سبک خودت را بساز." data-en="Get inspired. Make it your own.">الهام بگیر و سبک خودت را بساز.</p>
-      </div>
-
-      <div class="gallery-grid">
-        <a href="#looks" class="gallery-item gallery-tall">
-          <img src="https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?auto=format&fit=crop&w=700&q=85" alt="Beauty editorial portrait" loading="lazy">
-          <span>01 / BEAUTY</span>
-        </a>
-        <a href="#looks" class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85" alt="Makeup products" loading="lazy">
-          <span>02 / ESSENTIALS</span>
-        </a>
-        <a href="#looks" class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&q=85" alt="Beauty and makeup details" loading="lazy">
-          <span>03 / DETAILS</span>
-        </a>
-        <a href="#looks" class="gallery-item gallery-wide">
-          <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=1000&q=85" alt="Cosmetics and makeup collection" loading="lazy">
-          <span>04 / YOUR RITUAL</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="about-section" id="about">
-      <span class="about-star">✦</span>
-      <p class="eyebrow" data-fa="درباره بیوتی لب" data-en="OUR PHILOSOPHY">درباره بیوتی لب</p>
-      <h2 data-fa="قانون زیبایی؟<br>قانونی وجود ندارد." data-en="Beauty rules?<br>There are none.">قانون زیبایی؟<br>قانونی وجود ندارد.</h2>
-      <p data-fa="ما باور داریم زیبایی یعنی خودت باشی. اینجا جایی برای الهام، تجربه و پیدا کردن استایل شخصی توست."
-         data-en="We believe beauty is about being yourself. A space for inspiration, experimentation, and finding your own signature style.">
-        ما باور داریم زیبایی یعنی خودت باشی. اینجا جایی برای الهام، تجربه و پیدا کردن استایل شخصی توست.
-      </p>
-      <a href="#home" class="btn btn-primary" data-fa="دوباره کشف کن ↑" data-en="Explore Again ↑">دوباره کشف کن ↑</a>
+    <section class="newsletter">
+      <span class="newsletter-icon">💌</span>
+      <h2>نامه‌های صورتی ما!</h2>
+      <p>برای دریافت ایده‌های زیبایی و خبرهای تازه، ایمیلت را وارد کن.</p>
+      <form id="newsletterForm">
+        <input type="email" id="emailInput" placeholder="ایمیل تو..." required aria-label="آدرس ایمیل">
+        <button type="submit">عضو می‌شوم ♡</button>
+      </form>
+      <small id="newsletterMessage" aria-live="polite"></small>
     </section>
   </main>
 
-  <footer class="footer" id="favorites">
-    <div class="footer-top">
-      <a class="logo footer-logo" href="#home">
-        BEAUTY LAB<span>✦</span>
-        <small>BEAUTY · MAKEUP · YOU</small>
-      </a>
-      <div class="footer-message">
-        <h3 data-fa="زیبایی تو، امضای توست." data-en="Your beauty. Your signature.">زیبایی تو، امضای توست.</h3>
-        <p data-fa="الهام بگیر. متفاوت باش. خودت باش." data-en="Get inspired. Be bold. Be yourself.">الهام بگیر. متفاوت باش. خودت باش.</p>
-      </div>
-      <a class="back-top" href="#home" aria-label="Back to top">↑</a>
+  <footer class="footer">
+    <a href="#home" class="logo">BEAUTY <span>BLOOM</span><i>✿</i></a>
+    <p>با عشق ساخته شده برای تمام لحظه‌های درخشش تو ♡</p>
+    <div class="footer-links">
+      <a href="#home">خانه</a>
+      <a href="#products">محصولات</a>
+      <a href="#about">درباره ما</a>
     </div>
-    <div class="footer-bottom">
-      <span>© <span id="year"></span> BEAUTY LAB</span>
-      <span data-fa="ساخته‌شده برای دوست‌داران زیبایی ✦" data-en="Made for beauty lovers ✦">ساخته‌شده برای دوست‌داران زیبایی ✦</span>
-    </div>
+    <small>© 2026 BEAUTY BLOOM — Portfolio Demo</small>
   </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <button id="backToTop" aria-label="بازگشت به بالا">↑</button>
 
-  <script src="script.js"></script>
 </body>
 </html>
