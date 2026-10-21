@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BEAUTY LAB | Discover Your Beauty</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <a class="logo" href="#">BEAUTY <span>LAB ✦</span></a>
+    <nav>
+      <a href="#looks" data-en="Makeup Looks" data-fa="مدل‌های آرایش">Makeup Looks</a>
+      <a href="#discover" data-en="Find Your Style" data-fa="استایل خودت">Find Your Style</a>
+    </nav>
+    <button id="language">فارسی</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow" data-en="THE ART OF YOU" data-fa="هنر زیبایی تو">THE ART OF YOU</p>
+        <h1 data-en="Discover Your Beauty" data-fa="زیبایی خودت را کشف کن">Discover Your Beauty</h1>
+        <p data-en="Find your favorite makeup style and let your beauty shine."
+           data-fa="استایل آرایش مورد علاقه‌ات را پیدا کن و بدرخش.">
+          Find your favorite makeup style and let your beauty shine.
+        </p>
+        <a class="button" href="#discover" data-en="Find My Style" data-fa="پیدا کردن استایل من">Find My Style</a>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=85" alt="Beauty makeup portrait">
+        <span class="floating">✧ Your beauty, your rules</span>
+      </div>
+    </section>
+
+    <section class="looks" id="looks">
+      <p class="eyebrow" data-en="THE BEAUTY EDIT" data-fa="دنیای زیبایی">THE BEAUTY EDIT</p>
+      <h2 data-en="Choose Your Mood" data-fa="حال‌وهوای آرایشت را انتخاب کن">Choose Your Mood</h2>
+      <div class="cards">
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Natural makeup">
+          <h3 data-en="Natural Glow" data-fa="درخشش طبیعی">Natural Glow</h3>
+        </article>
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?auto=format&fit=crop&w=600&q=80" alt="Soft glam makeup">
+          <h3 data-en="Soft Glam" data-fa="سافت گلم">Soft Glam</h3>
+        </article>
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80" alt="Bold makeup">
+          <h3 data-en="Bold Beauty" data-fa="زیبایی جسورانه">Bold Beauty</h3>
+        </article>
+      </div>
+    </section>
+
+    <section class="discover" id="discover">
+      <p class="eyebrow" data-en="YOUR PERSONAL BEAUTY MOMENT" data-fa="لحظه زیبایی مخصوص تو">YOUR PERSONAL BEAUTY MOMENT</p>
+      <h2 data-en="What's Your Beauty Mood?" data-fa="استایل مورد علاقه‌ات چیست؟">What's Your Beauty Mood?</h2>
+      <div class="moods">
+        <button data-mood="natural" data-en="Fresh & Natural" data-fa="شاداب و طبیعی">Fresh & Natural</button>
+        <button data-mood="glam" data-en="Elegant & Glam" data-fa="شیک و درخشان">Elegant & Glam</button>
+        <button data-mood="bold" data-en="Bold & Creative" data-fa="جسور و خلاقانه">Bold & Creative</button>
+      </div>
+      <div id="result" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="logo" href="#">BEAUTY <span>LAB ✦</span></a>
+    <p>© 2026 BEAUTY LAB — <span data-en="The art of you" data-fa="هنر زیبایی تو">The art of you</span></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
