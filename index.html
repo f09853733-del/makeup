@@ -1,153 +1,106 @@
 
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pink Café | کافه صورتی</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="announcement">🎀 یک فنجان عشق، یک عالمه حال خوب!</div>
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
 
-  <header class="navbar">
-    <a href="#" class="logo">☕ Pink Café <span>♥</span></a>
-    <button class="menu-toggle" aria-label="باز کردن منو">☰</button>
-    <nav class="nav-links">
-      <a href="#home">خانه</a>
-      <a href="#menu">منوی خوشمزه</a>
-      <a href="#story">داستان ما</a>
-      <a href="#gallery">گالری</a>
-    </nav>
-    <a class="nav-button" href="#menu">دیدن منو ♡</a>
-  </header>
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+  menuToggle.setAttribute(
+    'aria-expanded',
+    navLinks.classList.contains('open')
+  );
+});
 
-  <main>
-    <section class="hero" id="home">
-      <div class="hero-content">
-        <span class="eyebrow">YOUR LITTLE HAPPY PLACE ✿</span>
-        <h1>یه ذره قهوه،<br><span>یه عالمه عشق!</span></h1>
-        <p>به دنیای صورتی ما خوش اومدی؛ جایی برای قهوه‌های خوش‌عطر، دسرهای رؤیایی و لحظه‌هایی که دلت می‌خواد متوقف بشن.</p>
-        <div class="hero-buttons">
-          <a class="button primary" href="#menu">منوی خوشمزه 🍓</a>
-          <a class="button secondary" href="#story">قصه کافه ما</a>
-        </div>
-        <div class="hero-note">♡ Made with love, coffee & strawberries</div>
-      </div>
-      <div class="hero-image">
-        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=85" alt="قهوه و فضای گرم کافه">
-        <div class="floating-card">♡ حال خوب از همین‌جا شروع می‌شه</div>
-        <span class="sparkle sparkle-one">✦</span>
-        <span class="sparkle sparkle-two">♡</span>
-      </div>
-    </section>
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => navLinks.classList.remove('open'));
+});
 
-    <section class="perks">
-      <div><span>☕</span><h3>قهوه‌های خاص</h3><p>با عطر و طعم فراموش‌نشدنی</p></div>
-      <div><span>🍰</span><h3>دسرهای رؤیایی</h3><p>شیرین مثل لحظه‌های خوب</p></div>
-      <div><span>🌷</span><h3>فضای دلبرانه</h3><p>برای قرارهای قشنگ تو</p></div>
-      <div><span>♡</span><h3>پر از عشق</h3><p>جزئیات کوچیک، حس بزرگ</p></div>
-    </section>
+// فیلتر محصولات
+const filters = document.querySelectorAll('.filter');
+const products = document.querySelectorAll('.product-card');
 
-    <section class="menu-section section" id="menu">
-      <div class="section-heading">
-        <span class="eyebrow">A LITTLE TASTE OF HAPPINESS</span>
-        <h2>خوشمزه‌های <span>محبوب ما</span> 🍓</h2>
-        <p>هر کدوم یه بهونه برای لبخند زدن!</p>
-      </div>
+filters.forEach(button => {
+  button.addEventListener('click', () => {
+    filters.forEach(item => item.classList.remove('active'));
+    button.classList.add('active');
 
-      <div class="filters">
-        <button class="filter active" data-filter="all">همه</button>
-        <button class="filter" data-filter="coffee">قهوه</button>
-        <button class="filter" data-filter="dessert">دسر</button>
-        <button class="filter" data-filter="drink">نوشیدنی</button>
-      </div>
+    const category = button.dataset.filter;
 
-      <div class="product-grid">
-        <article class="product-card" data-category="coffee">
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=700&q=85" alt="لاته خامه‌ای">
-            <span class="product-tag">محبوب ♡</span>
-          </div>
-          <div class="product-info"><h3>لاته صورتی</h3><p>نرم، لطیف و خوش‌عطر</p><div class="product-bottom"><b>۱۸۰ هزار تومان</b><button class="add-button" data-name="لاته صورتی">+ افزودن</button></div></div>
-        </article>
+    products.forEach(product => {
+      const show = category === 'all' ||
+        product.dataset.category === category;
 
-        <article class="product-card" data-category="dessert">
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=85" alt="کیک شکلاتی">
-            <span class="product-tag">دسر رؤیایی</span>
-          </div>
-          <div class="product-info"><h3>کیک شکلاتی</h3><p>یک تکه شادی با شکلات</p><div class="product-bottom"><b>۲۲۰ هزار تومان</b><button class="add-button" data-name="کیک شکلاتی">+ افزودن</button></div></div>
-        </article>
+      product.classList.toggle('hidden', !show);
+    });
+  });
+});
 
-        <article class="product-card" data-category="drink">
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=700&q=85" alt="نوشیدنی خنک میوه‌ای">
-            <span class="product-tag">خنک و خوشمزه</span>
-          </div>
-          <div class="product-info"><h3>اسموتی توت‌فرنگی</h3><p>خنک، میوه‌ای و دلبر</p><div class="product-bottom"><b>۱۹۰ هزار تومان</b><button class="add-button" data-name="اسموتی توت‌فرنگی">+ افزودن</button></div></div>
-        </article>
+// سبد خرید نمایشی
+let cart = [];
 
-        <article class="product-card" data-category="dessert">
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=700&q=85" alt="دسر خامه‌ای">
-            <span class="product-tag">انتخاب شیرین</span>
-          </div>
-          <div class="product-info"><h3>دسر توت‌فرنگی</h3><p>یه قاشق پر از عشق</p><div class="product-bottom"><b>۱۶۰ هزار تومان</b><button class="add-button" data-name="دسر توت‌فرنگی">+ افزودن</button></div></div>
-        </article>
-      </div>
-      <p class="cart-status" id="cart-status" aria-live="polite">هنوز چیزی به سبدت اضافه نکردی ♡</p>
-    </section>
+const cartStatus = document.getElementById('cart-status');
+const toast = document.getElementById('toast');
+let toastTimer;
 
-    <section class="story section" id="story">
-      <div class="story-image">
-        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1000&q=85" alt="فضای دنج و زیبای کافه">
-      </div>
-      <div class="story-content">
-        <span class="eyebrow">A STORY BREWED WITH LOVE</span>
-        <h2>اینجا فقط کافه نیست،<br><span>یه حس قشنگه! ♡</span></h2>
-        <p>Pink Café برای اون لحظه‌های کوچیک ساخته شده؛ وقتی با دوستت می‌خندی، کتاب موردعلاقه‌ات رو می‌خونی یا فقط می‌خوای کمی به خودت برسی.</p>
-        <a href="#gallery" class="button primary">بیا یه نگاهی بندازیم 🌸</a>
-      </div>
-    </section>
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
 
-    <section class="gallery section" id="gallery">
-      <div class="section-heading">
-        <span class="eyebrow">PINK MOMENTS</span>
-        <h2>گوشه‌ای از <span>دنیای ما</span> 🌷</h2>
-        <p>لحظه‌هایی به شیرینی یک فنجان قهوه</p>
-      </div>
-      <div class="gallery-grid">
-        <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=700&q=85" alt="دسرهای شیرین">
-        <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=700&q=85" alt="فضای کافه">
-        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=700&q=85" alt="خوراکی‌های خوشمزه">
-        <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=700&q=85" alt="یک گوشه دنج کافه">
-      </div>
-    </section>
+  toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2400);
+}
 
-    <section class="newsletter">
-      <span class="newsletter-heart">♡</span>
-      <h2>یه خبر شیرین برات داریم!</h2>
-      <p>برای دریافت خبرهای خوشمزه و پیشنهادهای صورتی، ایمیلت رو وارد کن.</p>
-      <form id="newsletter-form">
-        <input id="email" type="email" placeholder="ایمیل قشنگت رو بنویس..." required>
-        <button type="submit">عضوم کن ♡</button>
-      </form>
-      <small id="newsletter-status" aria-live="polite"></small>
-    </section>
-  </main>
+document.querySelectorAll('.add-button').forEach(button => {
+  button.addEventListener('click', () => {
+    cart.push(button.dataset.name);
+    cartStatus.textContent =
+      `سبدت ${cart.length} آیتم داره ♡ ${cart.join('، ')}`;
 
-  <footer class="footer">
-    <a class="logo" href="#home">☕ Pink Café <span>♥</span></a>
-    <p>با عشق دم شده، برای لحظه‌های قشنگ تو.</p>
-    <div class="socials"><a href="#gallery">Instagram</a><a href="#menu">Our Menu</a><a href="#story">Our Story</a></div>
-    <small>© 2026 Pink Café · طراحی شده با عشق ♡</small>
-  </footer>
+    showToast(`🍓 ${button.dataset.name} به سبدت اضافه شد!`);
+  });
+});
 
-  <div class="toast" id="toast" role="status"></div>
-  <button id="back-top" aria-label="بازگشت به بالا">↑</button>
-  <script src="script.js"></script>
-</body>
-</html>
+// فرم خبرنامه؛ نمایشی و بدون ارسال واقعی
+document.getElementById('newsletter-form').addEventListener('submit', event => {
+  event.preventDefault();
+
+  const email = document.getElementById('email').value;
+  document.getElementById('newsletter-status').textContent =
+    `ممنون از همراهیت ♡ (دموی سایت برای ${email})`;
+
+  event.target.reset();
+});
+
+// دکمه بازگشت به بالا
+const backTop = document.getElementById('back-top');
+
+window.addEventListener('scroll', () => {
+  backTop.classList.toggle('visible', window.scrollY > 400);
+});
+
+backTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// انیمیشن ورود بخش‌ها هنگام اسکرول
+const animatedItems = document.querySelectorAll(
+  '.product-card, .perks > div, .story, .gallery-grid img, .section-heading'
+);
+
+animatedItems.forEach(item => item.classList.add('reveal'));
+
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  animatedItems.forEach(item => observer.observe(item));
+} else {
+  animatedItems.forEach(item => item.classList.add('in-view'));
+}
