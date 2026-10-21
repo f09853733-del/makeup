@@ -1,106 +1,210 @@
 
-const menuToggle = document.querySelector('.menu-toggle');
-const navLinks = document.querySelector('.nav-links');
+document.addEventListener("DOMContentLoaded", () => {
+  const loader = document.getElementById("loader");
+  const bubblesContainer = document.getElementById("bubbles");
 
-menuToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-  menuToggle.setAttribute(
-    'aria-expanded',
-    navLinks.classList.contains('open')
-  );
-});
+  // Loading screen
+  window.addEventListener("load", () => {
+    setTimeout(() => loader.classList.add("hidden"), 700);
+  });
 
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => navLinks.classList.remove('open'));
-});
+  // اگر صفحه هنوز کامل بارگذاری نشده بود
+  setTimeout(() => loader.classList.add("hidden"), 2500);
 
-// فیلتر محصولات
-const filters = document.querySelectorAll('.filter');
-const products = document.querySelectorAll('.product-card');
+  // Create floating ocean bubbles
+  for (let i = 0; i < 28; i++) {
+    const bubble = document.createElement("span");
+    bubble.className = "bubble";
 
-filters.forEach(button => {
-  button.addEventListener('click', () => {
-    filters.forEach(item => item.classList.remove('active'));
-    button.classList.add('active');
+    const size = Math.random() * 17 + 5;
+    bubble.style.width = `${size}px`;
+    bubble.style.height = `${size}px`;
+    bubble.style.left = `${Math.random() * 100}%`;
+    bubble.style.animationDuration = `${Math.random() * 12 + 9}s`;
+    bubble.style.animationDelay = `${Math.random() * -20}s`;
 
-    const category = button.dataset.filter;
+    bubblesContainer.appendChild(bubble);
+  }
 
-    products.forEach(product => {
-      const show = category === 'all' ||
-        product.dataset.category === category;
+  // Mobile menu
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
 
-      product.classList.toggle('hidden', !show);
+  menuToggle.addEventListener("click", () => {
+    const isOpen = navLinks.classList.toggle("open");
+    menuToggle.textContent = isOpen ? "×" : "☰";
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  navLinks.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuToggle.textContent = "☰";
+      menuToggle.setAttribute("aria-expanded", "false");
     });
   });
-});
 
-// سبد خرید نمایشی
-let cart = [];
+  // Reveal sections when scrolling
+  const revealElements = document.querySelectorAll(".reveal");
 
-const cartStatus = document.getElementById('cart-status');
-const toast = document.getElementById('toast');
-let toastTimer;
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
 
-function showToast(message) {
-  toast.textContent = message;
-  toast.classList.add('show');
-  clearTimeout(toastTimer);
+    revealElements.forEach(element => revealObserver.observe(element));
+  } else {
+    revealElements.forEach(element => element.classList.add("visible"));
+  }
 
-  toastTimer = setTimeout(() => {
-    toast.classList.remove('show');
-  }, 2400);
-}
+  // Animated counters
+  const counters = document.querySelectorAll(".counter");
 
-document.querySelectorAll('.add-button').forEach(button => {
-  button.addEventListener('click', () => {
-    cart.push(button.dataset.name);
-    cartStatus.textContent =
-      `سبدت ${cart.length} آیتم داره ♡ ${cart.join('، ')}`;
+  function animateCounter(counter) {
+    const target = Number(counter.dataset.target);
+    const duration = 1600;
+    const startTime = performance.now();
 
-    showToast(`🍓 ${button.dataset.name} به سبدت اضافه شد!`);
-  });
-});
+    function update(now) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = Math.floor(target * eased);
 
-// فرم خبرنامه؛ نمایشی و بدون ارسال واقعی
-document.getElementById('newsletter-form').addEventListener('submit', event => {
-  event.preventDefault();
+      counter.textContent = value.toLocaleString("en-US");
 
-  const email = document.getElementById('email').value;
-  document.getElementById('newsletter-status').textContent =
-    `ممنون از همراهیت ♡ (دموی سایت برای ${email})`;
-
-  event.target.reset();
-});
-
-// دکمه بازگشت به بالا
-const backTop = document.getElementById('back-top');
-
-window.addEventListener('scroll', () => {
-  backTop.classList.toggle('visible', window.scrollY > 400);
-});
-
-backTop.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// انیمیشن ورود بخش‌ها هنگام اسکرول
-const animatedItems = document.querySelectorAll(
-  '.product-card, .perks > div, .story, .gallery-grid img, .section-heading'
-);
-
-animatedItems.forEach(item => item.classList.add('reveal'));
-
-if ('IntersectionObserver' in window) {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-        observer.unobserve(entry.target);
+      if (progress < 1) {
+        requestAnimationFrame(update);
       }
-    });
-  }, { threshold: 0.12 });
+    }
 
-  animatedItems.forEach(item => observer.observe(item));
-} else {
-  animatedItems.forEach(item => item.classList.add('in-view'));
-}
+    requestAnimationFrame(update);
+  }
+
+  if ("IntersectionObserver" in window) {
+    const counterObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => counterObserver.observe(counter));
+  } else {
+    counters.forEach(animateCounter);
+  }
+
+  // Creature information modal
+  const infoModal = document.getElementById("infoModal");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalDescription = document.getElementById("modalDescription");
+  const modalClose = document.getElementById("modalClose");
+
+  function openInfoModal(name, description) {
+    modalTitle.textContent = name;
+    modalDescription.textContent = description;
+    infoModal.classList.add("open");
+    infoModal.setAttribute("aria-hidden", "false");
+    modalClose.focus();
+  }
+
+  function closeInfoModal() {
+    infoModal.classList.remove("open");
+    infoModal.setAttribute("aria-hidden", "true");
+  }
+
+  document.querySelectorAll(".more-button").forEach(button => {
+    button.addEventListener("click", () => {
+      openInfoModal(button.dataset.name, button.dataset.description);
+    });
+  });
+
+  modalClose.addEventListener("click", closeInfoModal);
+
+  infoModal.addEventListener("click", event => {
+    if (event.target === infoModal) closeInfoModal();
+  });
+
+  // Gallery lightbox
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImage = document.getElementById("lightboxImage");
+  const lightboxClose = document.getElementById("lightboxClose");
+
+  document.querySelectorAll(".gallery-item").forEach(item => {
+    item.addEventListener("click", () => {
+      lightboxImage.src = item.dataset.image;
+      lightbox.classList.add("open");
+      lightbox.setAttribute("aria-hidden", "false");
+      lightboxClose.focus();
+    });
+  });
+
+  function closeLightbox() {
+    lightbox.classList.remove("open");
+    lightbox.setAttribute("aria-hidden", "true");
+  }
+
+  lightboxClose.addEventListener("click", closeLightbox);
+
+  lightbox.addEventListener("click", event => {
+    if (event.target === lightbox) closeLightbox();
+  });
+
+  // Keyboard support
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      closeInfoModal();
+      closeLightbox();
+      navLinks.classList.remove("open");
+      menuToggle.textContent = "☰";
+    }
+  });
+
+  // Dive interaction
+  const diveButton = document.getElementById("diveButton");
+  const diveMessage = document.getElementById("diveMessage");
+  const messages = [
+    "عمق ۱۰۰ متر: نور خورشید آرام‌آرام محو می‌شود... 🌊",
+    "عمق ۵۰۰ متر: به دنیای آبی تیره‌تر خوش آمدی... 🪼",
+    "عمق ۱۰۰۰ متر: اینجا تاریکی و نورهای زیستی با هم می‌رقصند... ✨",
+    "اکتشاف آغاز شد! رازهای اقیانوس هنوز تمام نشده‌اند... 🐠"
+  ];
+
+  let diveIndex = 0;
+
+  diveButton.addEventListener("click", () => {
+    diveMessage.textContent = messages[diveIndex];
+    diveIndex = (diveIndex + 1) % messages.length;
+
+    diveButton.textContent = "ادامه اکتشاف ↓";
+
+    document.querySelector(".depth-banner").animate(
+      [
+        { boxShadow: "0 0 0 rgba(114,245,243,0)" },
+        { boxShadow: "0 0 45px rgba(114,245,243,.18)" },
+        { boxShadow: "0 0 0 rgba(114,245,243,0)" }
+      ],
+      { duration: 1000, easing: "ease-in-out" }
+    );
+  });
+
+  // Back to top
+  const backToTop = document.getElementById("backToTop");
+
+  window.addEventListener("scroll", () => {
+    backToTop.classList.toggle("visible", window.scrollY > 450);
+  }, { passive: true });
+
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  // Current year in footer
+  document.getElementById("year").textContent = new Date().getFullYear();
+});
