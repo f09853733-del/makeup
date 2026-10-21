@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="BEAUTY BLOOM | دنیای زیبایی، آرایش و مراقبت از پوست">
-  <title>BEAUTY BLOOM | دنیای زیبایی</title>
+  <meta name="description" content="Strawberry Cafe - کافه صورتی، دنیای قهوه و دسرهای خوشمزه">
+  <title>STRAWBERRY CAFÉ | کافه صورتی</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,255 +16,227 @@
 </head>
 <body>
 
-  <div class="announcement">
-    ✨ به دنیای زیبایی خوش آمدی | زیبایی، به سبک خودت ✨
-  </div>
+  <div class="topbar">🍓 یه روز شیرین، با یه فنجون عشق شروع می‌شه!</div>
 
   <header class="navbar">
-    <a href="#home" class="logo">BEAUTY <span>BLOOM</span><i>✿</i></a>
-
+    <a class="logo" href="#home">STRAWBERRY <span>CAFÉ</span> 🍓</a>
     <button class="menu-toggle" id="menuToggle" aria-label="باز کردن منو">☰</button>
 
     <nav id="navMenu">
       <a href="#home">خانه</a>
-      <a href="#categories">دسته‌بندی</a>
-      <a href="#products">محصولات</a>
-      <a href="#about">درباره ما</a>
+      <a href="#menu">منوی کافه</a>
+      <a href="#story">داستان ما</a>
+      <a href="#gallery">گالری</a>
     </nav>
 
-    <div class="nav-actions">
-      <button class="icon-btn" id="searchToggle" aria-label="جستجو">⌕</button>
-      <button class="icon-btn cart-btn" id="cartButton" aria-label="سبد خرید">
-        ♡ <span id="cartCount">0</span>
-      </button>
-    </div>
+    <a class="nav-cta" href="#menu">منو رو ببین ♡</a>
   </header>
 
   <main>
     <section class="hero" id="home">
-      <div class="hero-content">
-        <span class="eyebrow">YOUR DAILY DOSE OF BEAUTY ✨</span>
-        <h1>درخشش تو،<br>داستان <span>زیبایی توست!</span></h1>
+      <div class="hero-copy">
+        <span class="eyebrow">A LITTLE CUP OF HAPPINESS</span>
+        <h1>زندگی شیرین‌تره<br>با یه ذره <span>توت‌فرنگی!</span></h1>
         <p>
-          دنیایی از رنگ، لطافت و زیبایی؛
-          جایی که محصولات مورد علاقه‌ات را کشف می‌کنی
-          و با استایل منحصربه‌فرد خودت می‌درخشی.
+          به کافه صورتی ما خوش اومدی؛
+          جایی برای قهوه‌های خوش‌عطر، کیک‌های دوست‌داشتنی
+          و لحظه‌هایی که دلت می‌خواد کششون بدی.
         </p>
-
         <div class="hero-buttons">
-          <a href="#products" class="btn btn-primary">کشف محصولات ✧</a>
-          <a href="#categories" class="btn btn-light">دنیای زیبایی</a>
+          <a class="btn btn-primary" href="#menu">کشف منوی خوشمزه 🍰</a>
+          <a class="btn btn-outline" href="#story">داستان کافه ما</a>
         </div>
-
-        <div class="hero-note">
-          <span>♡</span>
-          <div>
-            <strong>زیبایی، بدون محدودیت</strong>
-            <small>برای هر سلیقه، یک دنیای رنگی</small>
-          </div>
+        <div class="hero-caption">
+          <span class="mini-strawberry">🍓</span>
+          <span>تازه، خوشمزه، با کلی عشق درست شده!</span>
         </div>
       </div>
 
-      <div class="hero-visual">
-        <div class="hero-orbit"></div>
-        <div class="hero-photo">
-          <img
-            src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1000&q=85"
-            alt="محصولات آرایشی و زیبایی"
-          >
+      <div class="hero-art">
+        <div class="pink-circle"></div>
+        <div class="hero-image">
+          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1000&q=85" alt="کیک خوشمزه کافه" fetchpriority="high">
         </div>
-        <div class="floating-card card-top">
-          <span>✿</span>
-          <div><strong>Glow up!</strong><small>وقت درخشیدنه</small></div>
-        </div>
-        <div class="floating-card card-bottom">
-          <span>♡</span>
-          <div><strong>Love yourself</strong><small>خودت را دوست داشته باش</small></div>
-        </div>
-        <span class="sparkle sparkle-one">✦</span>
-        <span class="sparkle sparkle-two">✧</span>
-        <span class="sparkle sparkle-three">✿</span>
+        <div class="floating-note note-one">🍓<span>Berry sweet!</span></div>
+        <div class="floating-note note-two">♡ Made with love ♡</div>
+        <span class="deco deco-one">✦</span>
+        <span class="deco deco-two">♡</span>
+        <span class="deco deco-three">✿</span>
       </div>
-
-      <div class="hero-bottom">BEAUTY IS AN ATTITUDE — BLOOM EVERY DAY</div>
+      <div class="hero-bottom">SWEET MOMENTS · PRETTY DRINKS · HAPPY HEARTS</div>
     </section>
 
-    <section class="categories section" id="categories">
+    <section class="features">
+      <div><span>☕</span><strong>قهوه تازه</strong><small>Freshly brewed</small></div>
+      <div><span>🍰</span><strong>دسرهای خونگی</strong><small>Homemade treats</small></div>
+      <div><span>🌷</span><strong>فضای دوست‌داشتنی</strong><small>A cozy little place</small></div>
+      <div><span>💗</span><strong>ساخته‌شده با عشق</strong><small>Made with love</small></div>
+    </section>
+
+    <section class="menu-section section" id="menu">
       <div class="section-heading">
-        <span class="eyebrow">EXPLORE YOUR BEAUTY</span>
-        <h2>کدوم دنیای زیبایی <span>مال توئه؟</span></h2>
-        <p>محصول مورد علاقه‌ات را در دنیای رنگارنگ ما پیدا کن.</p>
+        <span class="eyebrow">A MENU FULL OF LOVE</span>
+        <h2>یه چیزی خوشمزه <span>انتخاب کن!</span></h2>
+        <p>از قهوه‌های پرانرژی تا دسرهای صورتی و شیرین.</p>
       </div>
 
-      <div class="category-grid">
-        <button class="category-card cat-pink" data-category="makeup">
-          <span class="category-emoji">💄</span>
-          <strong>آرایش و میکاپ</strong>
-          <small>Makeup Collection ↗</small>
-        </button>
-
-        <button class="category-card cat-purple" data-category="skincare">
-          <span class="category-emoji">🧴</span>
-          <strong>مراقبت از پوست</strong>
-          <small>Skincare Rituals ↗</small>
-        </button>
-
-        <button class="category-card cat-peach" data-category="fragrance">
-          <span class="category-emoji">🌸</span>
-          <strong>عطر و خوشبوکننده</strong>
-          <small>Lovely Scents ↗</small>
-        </button>
-
-        <button class="category-card cat-blue" data-category="accessories">
-          <span class="category-emoji">🪞</span>
-          <strong>اکسسوری زیبایی</strong>
-          <small>Beauty Essentials ↗</small>
-        </button>
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">همه خوشمزه‌ها</button>
+        <button class="filter-btn" data-filter="coffee">قهوه ☕</button>
+        <button class="filter-btn" data-filter="drink">نوشیدنی 🥤</button>
+        <button class="filter-btn" data-filter="dessert">دسر 🍰</button>
       </div>
+
+      <div class="menu-grid" id="menuGrid">
+
+        <article class="menu-card" data-category="drink" data-name="استرابری ماچا">
+          <div class="food-image">
+            <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=700&q=80" alt="نوشیدنی خنک و رنگی" loading="lazy">
+            <span class="food-label">GIRL FAVORITE</span>
+          </div>
+          <div class="food-info">
+            <span class="food-emoji">🍓</span>
+            <h3>استرابری ماچا</h3>
+            <p>ترکیب لطیف ماچا و طعم توت‌فرنگی</p>
+            <div class="food-bottom"><strong>۲۴۰٬۰۰۰ تومان</strong><button class="order-btn" data-name="استرابری ماچا">+ سفارش</button></div>
+          </div>
+        </article>
+
+        <article class="menu-card" data-category="coffee" data-name="آیس لاته">
+          <div class="food-image">
+            <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=700&q=80" alt="آیس لاته" loading="lazy">
+            <span class="food-label">COFFEE TIME</span>
+          </div>
+          <div class="food-info">
+            <span class="food-emoji">☕</span>
+            <h3>آیس لاته</h3>
+            <p>اسپرسو، شیر خنک و کلی حس خوب</p>
+            <div class="food-bottom"><strong>۱۹۰٬۰۰۰ تومان</strong><button class="order-btn" data-name="آیس لاته">+ سفارش</button></div>
+          </div>
+        </article>
+
+        <article class="menu-card" data-category="dessert" data-name="کیک توت‌فرنگی">
+          <div class="food-image">
+            <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=700&q=80" alt="کیک توت‌فرنگی" loading="lazy">
+            <span class="food-label">SWEET DREAM</span>
+          </div>
+          <div class="food-info">
+            <span class="food-emoji">🍰</span>
+            <h3>کیک توت‌فرنگی</h3>
+            <p>کیک نرم با خامه لطیف و توت‌فرنگی</p>
+            <div class="food-bottom"><strong>۲۲۰٬۰۰۰ تومان</strong><button class="order-btn" data-name="کیک توت‌فرنگی">+ سفارش</button></div>
+          </div>
+        </article>
+
+        <article class="menu-card" data-category="drink" data-name="لیموناد صورتی">
+          <div class="food-image">
+            <img src="https://images.unsplash.com/photo-1513558161293-cdaf765edfd7?auto=format&fit=crop&w=700&q=80" alt="نوشیدنی خنک میوه‌ای" loading="lazy">
+            <span class="food-label">FRESH & CUTE</span>
+          </div>
+          <div class="food-info">
+            <span class="food-emoji">🍋</span>
+            <h3>لیموناد صورتی</h3>
+            <p>ترش و شیرین، خنک و پر از طراوت</p>
+            <div class="food-bottom"><strong>۱۷۰٬۰۰۰ تومان</strong><button class="order-btn" data-name="لیموناد صورتی">+ سفارش</button></div>
+          </div>
+        </article>
+
+        <article class="menu-card" data-category="coffee" data-name="کاپوچینو">
+          <div class="food-image">
+            <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=700&q=80" alt="فنجان کاپوچینو" loading="lazy">
+            <span class="food-label">CLASSIC LOVE</span>
+          </div>
+          <div class="food-info">
+            <span class="food-emoji">🤎</span>
+            <h3>کاپوچینو</h3>
+            <p>قهوه خوش‌عطر با فوم شیر لطیف</p>
+            <div class="food-bottom"><strong>۱۸۰٬۰۰۰ تومان</strong><button class="order-btn" data-name="کاپوچینو">+ سفارش</button></div>
+          </div>
+        </article>
+
+        <article class="menu-card" data-category="dessert" data-name="کاپ‌کیک صورتی">
+          <div class="food-image">
+            <img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=700&q=80" alt="کاپ‌کیک‌های رنگی" loading="lazy">
+            <span class="food-label">CUTE ALERT</span>
+          </div>
+          <div class="food-info">
+            <span class="food-emoji">🧁</span>
+            <h3>کاپ‌کیک صورتی</h3>
+            <p>یه کیک کوچولو برای یه لبخند بزرگ</p>
+            <div class="food-bottom"><strong>۱۵۰٬۰۰۰ تومان</strong><button class="order-btn" data-name="کاپ‌کیک صورتی">+ سفارش</button></div>
+          </div>
+        </article>
+
+      </div>
+      <p id="emptyMessage" class="empty-message" hidden>چیزی پیدا نشد؛ یه دسته دیگه رو امتحان کن! 🍓</p>
+      <p class="demo-note">قیمت‌ها و سفارش‌ها در این نمونه‌کار نمایشی هستند.</p>
     </section>
 
-    <section class="products section" id="products">
-      <div class="section-heading">
-        <span class="eyebrow">A LITTLE BEAUTY MAGIC</span>
-        <h2>منتخب‌های <span>دوست‌داشتنی</span></h2>
-        <p>برای لحظه‌های کوچکی که حال دلت را زیباتر می‌کنند.</p>
-      </div>
-
-      <div class="product-toolbar">
-        <div class="filters" aria-label="فیلتر محصولات">
-          <button class="filter-btn active" data-filter="all">همه</button>
-          <button class="filter-btn" data-filter="makeup">آرایشی</button>
-          <button class="filter-btn" data-filter="skincare">پوستی</button>
-          <button class="filter-btn" data-filter="fragrance">عطر</button>
-          <button class="filter-btn" data-filter="accessories">اکسسوری</button>
-        </div>
-
-        <div class="search-box" id="searchBox">
-          <input id="searchInput" type="search" placeholder="جستجوی محصول..." aria-label="جستجوی محصول">
-        </div>
-      </div>
-
-      <div class="product-grid" id="productGrid">
-
-        <article class="product-card" data-category="makeup" data-name="رژلب صورتی رز">
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=700&q=80" alt="رژلب آرایشی" loading="lazy">
-            <span class="product-tag">BESTSELLER</span>
-            <button class="favorite" aria-label="افزودن رژلب به علاقه‌مندی‌ها">♡</button>
-          </div>
-          <div class="product-info">
-            <span class="product-type">MAKEUP</span>
-            <h3>رژلب صورتی رز</h3>
-            <div class="product-bottom">
-              <span class="price">۴۵۰٬۰۰۰ تومان</span>
-              <button class="add-cart" data-product="رژلب صورتی رز" aria-label="افزودن به سبد خرید">+</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="product-card" data-category="skincare" data-name="سرم آبرسان">
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=700&q=80" alt="محصول مراقبت از پوست" loading="lazy">
-            <span class="product-tag tag-new">NEW ✨</span>
-            <button class="favorite" aria-label="افزودن سرم به علاقه‌مندی‌ها">♡</button>
-          </div>
-          <div class="product-info">
-            <span class="product-type">SKINCARE</span>
-            <h3>سرم آبرسان</h3>
-            <div class="product-bottom">
-              <span class="price">۶۸۰٬۰۰۰ تومان</span>
-              <button class="add-cart" data-product="سرم آبرسان" aria-label="افزودن به سبد خرید">+</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="product-card" data-category="fragrance" data-name="عطر بلوم">
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=700&q=80" alt="شیشه عطر" loading="lazy">
-            <span class="product-tag">LOVELY</span>
-            <button class="favorite" aria-label="افزودن عطر به علاقه‌مندی‌ها">♡</button>
-          </div>
-          <div class="product-info">
-            <span class="product-type">FRAGRANCE</span>
-            <h3>عطر بلوم</h3>
-            <div class="product-bottom">
-              <span class="price">۱٬۲۰۰٬۰۰۰ تومان</span>
-              <button class="add-cart" data-product="عطر بلوم" aria-label="افزودن به سبد خرید">+</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="product-card" data-category="accessories" data-name="براش آرایشی">
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=700&q=80" alt="لوازم آرایش و براش" loading="lazy">
-            <span class="product-tag">GIRL FAVORITE</span>
-            <button class="favorite" aria-label="افزودن براش به علاقه‌مندی‌ها">♡</button>
-          </div>
-          <div class="product-info">
-            <span class="product-type">ACCESSORIES</span>
-            <h3>براش آرایشی</h3>
-            <div class="product-bottom">
-              <span class="price">۳۹۰٬۰۰۰ تومان</span>
-              <button class="add-cart" data-product="براش آرایشی" aria-label="افزودن به سبد خرید">+</button>
-            </div>
-          </div>
-        </article>
-
-      </div>
-      <p class="empty-message" id="emptyMessage" hidden>محصولی با این مشخصات پیدا نشد! ♡</p>
+    <section class="quote-banner">
+      <span class="quote-strawberry">🍓</span>
+      <span class="eyebrow">LIFE IS BETTER WITH DESSERT</span>
+      <h2>کالری‌ها رو فراموش کن،<br><span>لحظه‌ات رو مزه کن!</span></h2>
+      <p>بعضی از بهترین خاطره‌ها با یه فنجون قهوه شروع می‌شن.</p>
+      <a href="#gallery" class="btn btn-primary">بیا یه چرخی بزن ♡</a>
+      <span class="quote-heart">♡</span>
     </section>
 
-    <section class="beauty-banner">
-      <div class="banner-decoration">✿</div>
-      <span class="eyebrow">A REMINDER FOR YOU</span>
-      <h2>تو همین حالا هم <span>زیبایی!</span></h2>
-      <p>محصولات می‌توانند درخشش تو را همراهی کنند؛ اما زیبایی از خود تو شروع می‌شود.</p>
-      <a href="#products" class="btn btn-primary">دنیای مورد علاقه‌ات را ببین ♡</a>
-      <span class="banner-star">✦</span>
-    </section>
-
-    <section class="about section" id="about">
-      <div class="about-visual">
-        <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=900&q=85" alt="مراقبت و زیبایی پوست" loading="lazy">
-        <div class="about-sticker">BE YOUR<br>OWN KIND<br>OF BEAUTIFUL ♡</div>
+    <section class="story section" id="story">
+      <div class="story-image">
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1000&q=85" alt="فضای دنج یک کافه" loading="lazy">
+        <span class="story-stamp">YOUR<br>HAPPY<br>PLACE ♡</span>
       </div>
-      <div class="about-content">
-        <span class="eyebrow">A WORLD MADE WITH LOVE</span>
-        <h2>زیبایی یعنی<br><span>خودت بودن.</span></h2>
+      <div class="story-copy">
+        <span class="eyebrow">OUR LITTLE PINK WORLD</span>
+        <h2>یک گوشه دنج<br>برای <span>حال خوب تو</span></h2>
         <p>
-          در BEAUTY BLOOM، زیبایی فقط به محصولات محدود نمی‌شود.
-          اینجا فضایی رنگی و دوست‌داشتنی برای کشف سلیقه،
-          مراقبت از خود و لذت بردن از لحظه‌های کوچک است.
+          استرابری کافه، یک دنیای خیالی و شیرین برای دوست‌داران قهوه،
+          دسر و لحظه‌های قشنگ است. جایی که رنگ صورتی با عطر قهوه
+          همراه می‌شود و هر گوشه‌اش داستانی برای لبخند زدن دارد.
         </p>
-        <a href="#categories" class="text-link">بیشتر کشف کن <span>←</span></a>
+        <a href="#menu" class="text-link">منوی کافه <span>←</span></a>
+      </div>
+    </section>
+
+    <section class="gallery section" id="gallery">
+      <div class="section-heading">
+        <span class="eyebrow">LITTLE PINK MOMENTS</span>
+        <h2>گالری <span>لحظه‌های شیرین</span></h2>
+        <p>چند قاب خوشمزه از دنیای کافه ما.</p>
+      </div>
+      <div class="gallery-grid">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=700&q=80" alt="قهوه تازه" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=700&q=80" alt="دسر خوشمزه" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=700&q=80" alt="قهوه و کافه" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=80" alt="شیرینی تازه" loading="lazy">
       </div>
     </section>
 
     <section class="newsletter">
-      <span class="newsletter-icon">💌</span>
-      <h2>نامه‌های صورتی ما!</h2>
-      <p>برای دریافت ایده‌های زیبایی و خبرهای تازه، ایمیلت را وارد کن.</p>
+      <div class="newsletter-icon">💌</div>
+      <h2>یه نامه شیرین برات داریم!</h2>
+      <p>ایمیلت رو وارد کن تا در این نمونه‌کار، پیام خوش‌آمدگویی ببینی.</p>
       <form id="newsletterForm">
-        <input type="email" id="emailInput" placeholder="ایمیل تو..." required aria-label="آدرس ایمیل">
-        <button type="submit">عضو می‌شوم ♡</button>
+        <input type="email" id="emailInput" placeholder="ایمیل تو..." required aria-label="ایمیل">
+        <button type="submit">عضو می‌شم ♡</button>
       </form>
       <small id="newsletterMessage" aria-live="polite"></small>
     </section>
   </main>
 
   <footer class="footer">
-    <a href="#home" class="logo">BEAUTY <span>BLOOM</span><i>✿</i></a>
-    <p>با عشق ساخته شده برای تمام لحظه‌های درخشش تو ♡</p>
+    <a class="logo" href="#home">STRAWBERRY <span>CAFÉ</span> 🍓</a>
+    <p>با عشق، قهوه و کمی جادوی توت‌فرنگی ساخته شده ♡</p>
     <div class="footer-links">
       <a href="#home">خانه</a>
-      <a href="#products">محصولات</a>
-      <a href="#about">درباره ما</a>
+      <a href="#menu">منو</a>
+      <a href="#story">داستان ما</a>
+      <a href="#gallery">گالری</a>
     </div>
-    <small>© 2026 BEAUTY BLOOM — Portfolio Demo</small>
+    <small>© 2026 STRAWBERRY CAFÉ — Creative Portfolio Demo</small>
   </footer>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <button id="backToTop" aria-label="بازگشت به بالا">↑</button>
-
 </body>
 </html>
