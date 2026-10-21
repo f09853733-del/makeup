@@ -3,22 +3,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuToggle = document.getElementById("menuToggle");
   const navMenu = document.getElementById("navMenu");
   const filterButtons = document.querySelectorAll(".filter-btn");
-  const categoryButtons = document.querySelectorAll(".category-card");
-  const productCards = document.querySelectorAll(".product-card");
-  const searchInput = document.getElementById("searchInput");
-  const searchToggle = document.getElementById("searchToggle");
-  const searchBox = document.getElementById("searchBox");
-  const cartCount = document.getElementById("cartCount");
-  const cartButton = document.getElementById("cartButton");
-  const toast = document.getElementById("toast");
+  const menuCards = document.querySelectorAll(".menu-card");
   const emptyMessage = document.getElementById("emptyMessage");
+  const toast = document.getElementById("toast");
   const backToTop = document.getElementById("backToTop");
 
-  let activeCategory = "all";
-  let cart = [];
+  let activeFilter = "all";
   let toastTimer;
 
-  // پیام کوتاه پایین صفحه
+  // نمایش پیام زیبا در پایین صفحه
   function showToast(message) {
     toast.textContent = message;
     toast.classList.add("show");
@@ -26,151 +19,81 @@ document.addEventListener("DOMContentLoaded", () => {
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => {
       toast.classList.remove("show");
-    }, 2400);
+    }, 2600);
   }
 
   // منوی موبایل
+  menuToggle.setAttribute("aria-expanded", "false");
+
   menuToggle.addEventListener("click", () => {
-    const isOpen = navMenu.classList.toggle("open");
-    menuToggle.setAttribute("aria-expanded", String(isOpen));
-    menuToggle.textContent = isOpen ? "✕" : "☰";
+    const opened = navMenu.classList.toggle("open");
+
+    menuToggle.textContent = opened ? "✕" : "☰";
+    menuToggle.setAttribute("aria-expanded", String(opened));
   });
 
   navMenu.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", () => {
       navMenu.classList.remove("open");
-      menuToggle.setAttribute("aria-expanded", "false");
       menuToggle.textContent = "☰";
+      menuToggle.setAttribute("aria-expanded", "false");
     });
   });
 
-  // نمایش جست‌وجو
-  searchToggle.addEventListener("click", () => {
-    searchBox.classList.toggle("search-open");
+  // فیلتر کردن منوی کافه
+  function filterMenu(category) {
+    activeFilter = category;
+    let visibleItems = 0;
 
-    searchBox.style.display =
-      searchBox.style.display === "block" ? "" : "block";
+    menuCards.forEach(card => {
+      const matches =
+        category === "all" || card.dataset.category === category;
 
-    if (searchBox.style.display === "block") {
-      searchInput.focus();
-      document.getElementById("products").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    }
-  });
+      card.hidden = !matches;
 
-  // فیلتر و جست‌وجوی هم‌زمان
-  function filterProducts() {
-    const query = searchInput.value.trim().toLocaleLowerCase("fa");
-    let visibleCount = 0;
-
-    productCards.forEach(card => {
-      const category = card.dataset.category;
-      const name = card.dataset.name.toLocaleLowerCase("fa");
-
-      const matchesCategory =
-        activeCategory === "all" || category === activeCategory;
-
-      const matchesSearch = name.includes(query);
-      const isVisible = matchesCategory && matchesSearch;
-
-      card.hidden = !isVisible;
-
-      if (isVisible) visibleCount++;
+      if (matches) visibleItems++;
     });
 
-    emptyMessage.hidden = visibleCount !== 0;
+    filterButtons.forEach(button => {
+      const active = button.dataset.filter === category;
+
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+
+    emptyMessage.hidden = visibleItems !== 0;
   }
 
   filterButtons.forEach(button => {
+    button.setAttribute(
+      "aria-pressed",
+      String(button.classList.contains("active"))
+    );
+
     button.addEventListener("click", () => {
-      activeCategory = button.dataset.filter;
-
-      filterButtons.forEach(item => {
-        item.classList.toggle("active", item === button);
-      });
-
-      filterProducts();
+      filterMenu(button.dataset.filter);
     });
   });
 
-  categoryButtons.forEach(button => {
+  // سفارش نمایشی
+  const orders = [];
+
+  document.querySelectorAll(".order-btn").forEach(button => {
     button.addEventListener("click", () => {
-      activeCategory = button.dataset.category;
+      const productName = button.dataset.name;
+      orders.push(productName);
 
-      filterButtons.forEach(item => {
-        item.classList.toggle(
-          "active",
-          item.dataset.filter === activeCategory
-        );
-      });
+      button.textContent = "✓ اضافه شد";
 
-      filterProducts();
-
-      document.getElementById("products").scrollIntoView({
-        behavior: "smooth"
-      });
-    });
-  });
-
-  searchInput.addEventListener("input", filterProducts);
-
-  // علاقه‌مندی‌ها
-  document.querySelectorAll(".favorite").forEach(button => {
-    button.setAttribute("aria-pressed", "false");
-
-    button.addEventListener("click", () => {
-      const isFavorite = button.classList.toggle("is-favorite");
-
-      button.textContent = isFavorite ? "♥" : "♡";
-      button.setAttribute("aria-pressed", String(isFavorite));
-
-      const productName =
-        button.closest(".product-card").dataset.name;
-
-      showToast(
-        isFavorite
-          ? `♡ ${productName} به علاقه‌مندی‌ها اضافه شد`
-          : `${productName} از علاقه‌مندی‌ها حذف شد`
-      );
-    });
-  });
-
-  // سبد خرید نمایشی
-  document.querySelectorAll(".add-cart").forEach(button => {
-    button.addEventListener("click", () => {
-      cart.push(button.dataset.product);
-      cartCount.textContent = cart.length;
-
-      button.classList.add("added");
-      showToast(`✿ ${button.dataset.product} به سبد خرید اضافه شد`);
+      showToast(`🍓 ${productName} به سفارش نمایشی تو اضافه شد!`);
 
       setTimeout(() => {
-        button.classList.remove("added");
-      }, 400);
+        button.textContent = "+ سفارش";
+      }, 1200);
     });
   });
 
-  cartButton.addEventListener("click", () => {
-    if (cart.length === 0) {
-      showToast("سبد خریدت هنوز خالیه! ♡");
-      return;
-    }
-
-    const summary = cart.reduce((result, product) => {
-      result[product] = (result[product] || 0) + 1;
-      return result;
-    }, {});
-
-    const details = Object.entries(summary)
-      .map(([name, quantity]) => `${name} × ${quantity}`)
-      .join("، ");
-
-    showToast(`سبد خرید (${cart.length} مورد): ${details}`);
-  });
-
-  // فرم عضویت نمایشی
+  // فرم خبرنامه؛ بدون ارسال واقعی ایمیل
   const newsletterForm = document.getElementById("newsletterForm");
   const emailInput = document.getElementById("emailInput");
   const newsletterMessage =
@@ -185,14 +108,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     newsletterMessage.textContent =
-      "ممنون از همراهیت! 💌 این فرم در نسخه نمایشی است.";
+      "چه عالی! 💌 فرم نمایشی با موفقیت تکمیل شد.";
 
     newsletterForm.reset();
   });
 
-  // بازگشت به بالای صفحه
+  // دکمه بازگشت به بالا
   window.addEventListener("scroll", () => {
-    backToTop.classList.toggle("visible", window.scrollY > 400);
+    backToTop.classList.toggle("visible", window.scrollY > 350);
   }, { passive: true });
 
   backToTop.addEventListener("click", () => {
@@ -202,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ورود نرم کارت‌ها هنگام اسکرول
+  // نمایش نرم بخش‌ها هنگام ورود به صفحه
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -214,7 +137,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }, { threshold: 0.12 });
 
     document.querySelectorAll(
-      ".category-card, .product-card, .about-content"
+      ".features > div, .menu-card, .story-copy, .gallery-grid img"
     ).forEach(element => observer.observe(element));
   }
+
+  // شروع با نمایش تمام آیتم‌ها
+  filterMenu(activeFilter);
 });
