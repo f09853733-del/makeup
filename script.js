@@ -1,217 +1,220 @@
 
-const html = document.documentElement;
-const languageToggle = document.getElementById("languageToggle");
-const menuToggle = document.getElementById("menuToggle");
-const nav = document.getElementById("nav");
-const toast = document.getElementById("toast");
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menuToggle");
+  const navMenu = document.getElementById("navMenu");
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const categoryButtons = document.querySelectorAll(".category-card");
+  const productCards = document.querySelectorAll(".product-card");
+  const searchInput = document.getElementById("searchInput");
+  const searchToggle = document.getElementById("searchToggle");
+  const searchBox = document.getElementById("searchBox");
+  const cartCount = document.getElementById("cartCount");
+  const cartButton = document.getElementById("cartButton");
+  const toast = document.getElementById("toast");
+  const emptyMessage = document.getElementById("emptyMessage");
+  const backToTop = document.getElementById("backToTop");
 
-let currentLanguage = "fa";
-let toastTimer;
+  let activeCategory = "all";
+  let cart = [];
+  let toastTimer;
 
-const translations = {
-  natural: {
-    fa: {
-      title: "درخشش طبیعی",
-      text: "رنگ‌های ملایم، آرایش سبک و ظاهری تازه را امتحان کن."
-    },
-    en: {
-      title: "Natural Glow",
-      text: "Try soft colors, light makeup, and a fresh everyday look."
-    }
-  },
-  glam: {
-    fa: {
-      title: "گلم ملایم",
-      text: "با سایه‌های درخشان و جلوه‌ای شیک، استایلت را کامل کن."
-    },
-    en: {
-      title: "Soft Glam",
-      text: "Complete your style with luminous shades and elegant details."
-    }
-  },
-  bold: {
-    fa: {
-      title: "زیبایی جسورانه",
-      text: "رنگ‌های قوی و جزئیات متفاوت را برای یک استایل خاص امتحان کن."
-    },
-    en: {
-      title: "Bold Beauty",
-      text: "Experiment with expressive colors and striking details."
-    }
-  },
-  bridal: {
-    fa: {
-      title: "درخشش عروس",
-      text: "یک استایل لطیف و رمانتیک با جلوه‌ای ماندگار انتخاب کن."
-    },
-    en: {
-      title: "Bridal Glow",
-      text: "Discover a romantic, delicate look with timeless elegance."
-    }
+  // پیام کوتاه پایین صفحه
+  function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove("show");
+    }, 2400);
   }
-};
 
-function showToast(message) {
-  toast.textContent = message;
-  toast.classList.add("show");
+  // منوی موبایل
+  menuToggle.addEventListener("click", () => {
+    const isOpen = navMenu.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.textContent = isOpen ? "✕" : "☰";
+  });
 
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => {
-    toast.classList.remove("show");
-  }, 2400);
-}
+  navMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.textContent = "☰";
+    });
+  });
 
-function changeLanguage(language) {
-  currentLanguage = language;
+  // نمایش جست‌وجو
+  searchToggle.addEventListener("click", () => {
+    searchBox.classList.toggle("search-open");
 
-  html.lang = language;
-  html.dir = language === "fa" ? "rtl" : "ltr";
-  document.body.classList.toggle("english", language === "en");
+    searchBox.style.display =
+      searchBox.style.display === "block" ? "" : "block";
 
-  document.querySelectorAll("[data-fa][data-en]").forEach(element => {
-    const value = element.dataset[language];
-
-    if (value !== undefined) {
-      // The main hero and about headings intentionally contain <em> or <br>.
-      if (
-        element.matches(".hero h1, .about-section h2")
-      ) {
-        element.innerHTML = value;
-      } else {
-        element.textContent = value;
-      }
+    if (searchBox.style.display === "block") {
+      searchInput.focus();
+      document.getElementById("products").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
     }
   });
 
-  languageToggle.textContent = language === "fa" ? "EN" : "FA";
-  languageToggle.setAttribute(
-    "aria-label",
-    language === "fa" ? "Switch to English" : "تغییر به فارسی"
-  );
+  // فیلتر و جست‌وجوی هم‌زمان
+  function filterProducts() {
+    const query = searchInput.value.trim().toLocaleLowerCase("fa");
+    let visibleCount = 0;
 
-  menuToggle.setAttribute(
-    "aria-label",
-    language === "fa" ? "باز کردن منو" : "Open menu"
-  );
+    productCards.forEach(card => {
+      const category = card.dataset.category;
+      const name = card.dataset.name.toLocaleLowerCase("fa");
 
-  // Keep the selected filter highlighted after switching languages.
-  updateFilters();
-}
+      const matchesCategory =
+        activeCategory === "all" || category === activeCategory;
 
-languageToggle.addEventListener("click", () => {
-  changeLanguage(currentLanguage === "fa" ? "en" : "fa");
-});
+      const matchesSearch = name.includes(query);
+      const isVisible = matchesCategory && matchesSearch;
 
-menuToggle.addEventListener("click", () => {
-  const isOpen = nav.classList.toggle("open");
-  menuToggle.textContent = isOpen ? "✕" : "☰";
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
-});
+      card.hidden = !isVisible;
 
-nav.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
-    nav.classList.remove("open");
-    menuToggle.textContent = "☰";
-    menuToggle.setAttribute("aria-expanded", "false");
-  });
-});
-
-// Makeup category filters
-let activeFilter = "all";
-
-function updateFilters() {
-  document.querySelectorAll(".filter-btn").forEach(button => {
-    const isActive = button.dataset.filter === activeFilter;
-    button.classList.toggle("active", isActive);
-    button.setAttribute("aria-pressed", String(isActive));
-  });
-
-  document.querySelectorAll(".look-card").forEach(card => {
-    const matches =
-      activeFilter === "all" ||
-      card.dataset.category === activeFilter;
-
-    card.hidden = !matches;
-  });
-}
-
-document.querySelectorAll(".filter-btn").forEach(button => {
-  button.addEventListener("click", () => {
-    activeFilter = button.dataset.filter;
-    updateFilters();
-  });
-});
-
-// Favorite buttons
-document.querySelectorAll(".favorite-btn").forEach(button => {
-  button.setAttribute("aria-pressed", "false");
-
-  button.addEventListener("click", () => {
-    const isSaved = button.classList.toggle("saved");
-
-    button.textContent = isSaved ? "♥" : "♡";
-    button.setAttribute("aria-pressed", String(isSaved));
-
-    const message = currentLanguage === "fa"
-      ? (isSaved ? "به علاقه‌مندی‌ها اضافه شد ♥" : "از علاقه‌مندی‌ها حذف شد")
-      : (isSaved ? "Added to favorites ♥" : "Removed from favorites");
-
-    showToast(message);
-  });
-});
-
-// Beauty mood quiz
-const quizResult = document.getElementById("quizResult");
-
-document.querySelectorAll(".mood-btn").forEach(button => {
-  button.addEventListener("click", () => {
-    const mood = button.dataset.mood;
-    const result = translations[mood][currentLanguage];
-
-    document.querySelectorAll(".mood-btn").forEach(option => {
-      const selected = option === button;
-      option.classList.toggle("selected", selected);
-      option.setAttribute("aria-pressed", String(selected));
+      if (isVisible) visibleCount++;
     });
 
-    quizResult.replaceChildren();
+    emptyMessage.hidden = visibleCount !== 0;
+  }
 
-    const title = document.createElement("strong");
-    title.textContent = currentLanguage === "fa"
-      ? `پیشنهاد ما: ${result.title}`
-      : `Our pick: ${result.title}`;
+  filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      activeCategory = button.dataset.filter;
 
-    const description = document.createElement("span");
-    description.textContent = result.text;
+      filterButtons.forEach(item => {
+        item.classList.toggle("active", item === button);
+      });
 
-    quizResult.append(title, description);
-    quizResult.hidden = false;
-
-    // Scroll the recommendation into view on small screens.
-    quizResult.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest"
+      filterProducts();
     });
   });
-});
 
-// Scroll to the selected makeup style from its arrow button.
-document.querySelectorAll(".arrow-btn").forEach(button => {
-  button.addEventListener("click", () => {
-    activeFilter = button.dataset.look;
-    updateFilters();
+  categoryButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      activeCategory = button.dataset.category;
 
-    document.getElementById("looks").scrollIntoView({
-      behavior: "smooth",
-      block: "start"
+      filterButtons.forEach(item => {
+        item.classList.toggle(
+          "active",
+          item.dataset.filter === activeCategory
+        );
+      });
+
+      filterProducts();
+
+      document.getElementById("products").scrollIntoView({
+        behavior: "smooth"
+      });
     });
   });
+
+  searchInput.addEventListener("input", filterProducts);
+
+  // علاقه‌مندی‌ها
+  document.querySelectorAll(".favorite").forEach(button => {
+    button.setAttribute("aria-pressed", "false");
+
+    button.addEventListener("click", () => {
+      const isFavorite = button.classList.toggle("is-favorite");
+
+      button.textContent = isFavorite ? "♥" : "♡";
+      button.setAttribute("aria-pressed", String(isFavorite));
+
+      const productName =
+        button.closest(".product-card").dataset.name;
+
+      showToast(
+        isFavorite
+          ? `♡ ${productName} به علاقه‌مندی‌ها اضافه شد`
+          : `${productName} از علاقه‌مندی‌ها حذف شد`
+      );
+    });
+  });
+
+  // سبد خرید نمایشی
+  document.querySelectorAll(".add-cart").forEach(button => {
+    button.addEventListener("click", () => {
+      cart.push(button.dataset.product);
+      cartCount.textContent = cart.length;
+
+      button.classList.add("added");
+      showToast(`✿ ${button.dataset.product} به سبد خرید اضافه شد`);
+
+      setTimeout(() => {
+        button.classList.remove("added");
+      }, 400);
+    });
+  });
+
+  cartButton.addEventListener("click", () => {
+    if (cart.length === 0) {
+      showToast("سبد خریدت هنوز خالیه! ♡");
+      return;
+    }
+
+    const summary = cart.reduce((result, product) => {
+      result[product] = (result[product] || 0) + 1;
+      return result;
+    }, {});
+
+    const details = Object.entries(summary)
+      .map(([name, quantity]) => `${name} × ${quantity}`)
+      .join("، ");
+
+    showToast(`سبد خرید (${cart.length} مورد): ${details}`);
+  });
+
+  // فرم عضویت نمایشی
+  const newsletterForm = document.getElementById("newsletterForm");
+  const emailInput = document.getElementById("emailInput");
+  const newsletterMessage =
+    document.getElementById("newsletterMessage");
+
+  newsletterForm.addEventListener("submit", event => {
+    event.preventDefault();
+
+    if (!emailInput.checkValidity()) {
+      emailInput.reportValidity();
+      return;
+    }
+
+    newsletterMessage.textContent =
+      "ممنون از همراهیت! 💌 این فرم در نسخه نمایشی است.";
+
+    newsletterForm.reset();
+  });
+
+  // بازگشت به بالای صفحه
+  window.addEventListener("scroll", () => {
+    backToTop.classList.toggle("visible", window.scrollY > 400);
+  }, { passive: true });
+
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
+  // ورود نرم کارت‌ها هنگام اسکرول
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(
+      ".category-card, .product-card, .about-content"
+    ).forEach(element => observer.observe(element));
+  }
 });
-
-// Automatically update the footer year.
-document.getElementById("year").textContent =
-  new Date().getFullYear();
-
-// Initialize the site in Persian.
-changeLanguage("fa");
-updateFilters();
