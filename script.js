@@ -1,210 +1,227 @@
 
-document.addEventListener("DOMContentLoaded", () => {
-  const loader = document.getElementById("loader");
-  const bubblesContainer = document.getElementById("bubbles");
+const $ = (selector, parent = document) =>
+  parent.querySelector(selector);
 
-  // Loading screen
-  window.addEventListener("load", () => {
-    setTimeout(() => loader.classList.add("hidden"), 700);
-  });
+const $$ = (selector, parent = document) =>
+  [...parent.querySelectorAll(selector)];
 
-  // اگر صفحه هنوز کامل بارگذاری نشده بود
-  setTimeout(() => loader.classList.add("hidden"), 2500);
+// 1. Loading screen
+const loader = $("#loader");
 
-  // Create floating ocean bubbles
-  for (let i = 0; i < 28; i++) {
-    const bubble = document.createElement("span");
-    bubble.className = "bubble";
+function hideLoader() {
+  loader?.classList.add("done");
+}
 
-    const size = Math.random() * 17 + 5;
-    bubble.style.width = `${size}px`;
-    bubble.style.height = `${size}px`;
-    bubble.style.left = `${Math.random() * 100}%`;
-    bubble.style.animationDuration = `${Math.random() * 12 + 9}s`;
-    bubble.style.animationDelay = `${Math.random() * -20}s`;
+window.addEventListener("load", hideLoader);
+setTimeout(hideLoader, 2200);
 
-    bubblesContainer.appendChild(bubble);
+// 2. Animated background stars
+const starField = $(".stars");
+
+if (starField) {
+  const fragment = document.createDocumentFragment();
+
+  for (let i = 0; i < 75; i++) {
+    const star = document.createElement("span");
+    star.className = "star-dot";
+
+    star.style.left = `${Math.random() * 100}%`;
+    star.style.top = `${Math.random() * 100}%`;
+
+    const size = Math.random() * 2.5 + 1;
+    star.style.width = `${size}px`;
+    star.style.height = `${size}px`;
+    star.style.setProperty(
+      "--duration",
+      `${2 + Math.random() * 5}s`
+    );
+    star.style.animationDelay = `${Math.random() * -6}s`;
+
+    fragment.appendChild(star);
   }
 
-  // Mobile menu
-  const menuToggle = document.getElementById("menuToggle");
-  const navLinks = document.getElementById("navLinks");
+  starField.appendChild(fragment);
+}
 
-  menuToggle.addEventListener("click", () => {
-    const isOpen = navLinks.classList.toggle("open");
-    menuToggle.textContent = isOpen ? "×" : "☰";
-    menuToggle.setAttribute("aria-expanded", String(isOpen));
+// 3. Cursor glow (desktop only)
+const cursorGlow = $(".cursor-glow");
+
+if (cursorGlow && window.matchMedia(
+  "(hover: hover) and (pointer: fine)"
+).matches) {
+  window.addEventListener("pointermove", (event) => {
+    cursorGlow.style.left = `${event.clientX}px`;
+    cursorGlow.style.top = `${event.clientY}px`;
+  });
+}
+
+// 4. Reliable image fallback
+$$("img[data-fallback]").forEach((img) => {
+  let triedFallback = false;
+
+  img.addEventListener("error", () => {
+    if (!triedFallback) {
+      triedFallback = true;
+
+      const fallback = img.dataset.fallback;
+
+      if (fallback && img.src !== fallback) {
+        img.src = fallback;
+        return;
+      }
+    }
+
+    // Both image URLs failed: keep the card attractive.
+    img.style.display = "none";
+
+    const wrap = img.closest(".image-wrap");
+
+    if (wrap) {
+      wrap.style.background =
+        "radial-gradient(ellipse at 50% 20%, #7754a0, transparent 65%), " +
+        "linear-gradient(145deg, #171c45, #38234e)";
+    }
+
+    if (img.classList.contains("hero-image")) {
+      img.style.display = "block";
+      img.style.opacity = "0";
+
+      const hero = $(".hero");
+
+      if (hero) {
+        hero.style.background =
+          "radial-gradient(ellipse at 65% 30%, #81559e, transparent 45%), " +
+          "linear-gradient(135deg, #171c45, #38234e)";
+      }
+    }
   });
 
-  navLinks.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", () => {
-      navLinks.classList.remove("open");
-      menuToggle.textContent = "☰";
-      menuToggle.setAttribute("aria-expanded", "false");
+  // Also check images that failed before this listener was attached.
+  if (img.complete && img.naturalWidth === 0 && img.src) {
+    img.dispatchEvent(new Event("error"));
+  }
+});
+
+// 5. Gallery category filters
+const filterButtons = $$(".filter");
+const dreamCards = $$(".dream-card");
+const emptyMessage = $(".empty-message");
+
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const category = button.dataset.filter;
+    let count = 0;
+
+    filterButtons.forEach((item) => {
+      const active = item === button;
+      item.classList.toggle("active", active);
+      item.setAttribute("aria-pressed", String(active));
     });
+
+    dreamCards.forEach((card) => {
+      const matches =
+        category === "all" ||
+        card.dataset.category === category;
+
+      card.classList.toggle("hidden", !matches);
+
+      if (matches) {
+        count++;
+      }
+    });
+
+    if (emptyMessage) {
+      emptyMessage.hidden = count > 0;
+    }
   });
 
-  // Reveal sections when scrolling
-  const revealElements = document.querySelectorAll(".reveal");
+  button.setAttribute(
+    "aria-pressed",
+    String(button.classList.contains("active"))
+  );
+});
 
-  if ("IntersectionObserver" in window) {
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
+// 6. Favorite hearts
+$$(".favorite").forEach((button) => {
+  button.addEventListener("click", () => {
+    const liked = button.classList.toggle("liked");
+
+    button.textContent = liked ? "♥" : "♡";
+    button.setAttribute("aria-pressed", String(liked));
+  });
+});
+
+// 7. Reveal sections on scroll
+const revealElements = $$(".reveal");
+
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    },
+    { threshold: 0.08 }
+  );
 
-    revealElements.forEach(element => revealObserver.observe(element));
-  } else {
-    revealElements.forEach(element => element.classList.add("visible"));
-  }
+  revealElements.forEach((element) => {
+    revealObserver.observe(element);
+  });
+} else {
+  revealElements.forEach((element) => {
+    element.classList.add("visible");
+  });
+}
 
-  // Animated counters
-  const counters = document.querySelectorAll(".counter");
+// 8. Highlight navigation as sections enter view
+const navLinks = $$(".nav-link");
+const pageSections = $$("main section[id]");
 
-  function animateCounter(counter) {
-    const target = Number(counter.dataset.target);
-    const duration = 1600;
-    const startTime = performance.now();
+if ("IntersectionObserver" in window) {
+  const navObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
 
-    function update(now) {
-      const progress = Math.min((now - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const value = Math.floor(target * eased);
+        navLinks.forEach((link) => {
+          const active =
+            link.getAttribute("href") === `#${entry.target.id}`;
 
-      counter.textContent = value.toLocaleString("en-US");
-
-      if (progress < 1) {
-        requestAnimationFrame(update);
-      }
-    }
-
-    requestAnimationFrame(update);
-  }
-
-  if ("IntersectionObserver" in window) {
-    const counterObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target);
-          observer.unobserve(entry.target);
-        }
+          link.classList.toggle("active", active);
+        });
       });
-    }, { threshold: 0.5 });
+    },
+    { rootMargin: "-20% 0px -65% 0px" }
+  );
 
-    counters.forEach(counter => counterObserver.observe(counter));
-  } else {
-    counters.forEach(animateCounter);
-  }
-
-  // Creature information modal
-  const infoModal = document.getElementById("infoModal");
-  const modalTitle = document.getElementById("modalTitle");
-  const modalDescription = document.getElementById("modalDescription");
-  const modalClose = document.getElementById("modalClose");
-
-  function openInfoModal(name, description) {
-    modalTitle.textContent = name;
-    modalDescription.textContent = description;
-    infoModal.classList.add("open");
-    infoModal.setAttribute("aria-hidden", "false");
-    modalClose.focus();
-  }
-
-  function closeInfoModal() {
-    infoModal.classList.remove("open");
-    infoModal.setAttribute("aria-hidden", "true");
-  }
-
-  document.querySelectorAll(".more-button").forEach(button => {
-    button.addEventListener("click", () => {
-      openInfoModal(button.dataset.name, button.dataset.description);
-    });
+  pageSections.forEach((section) => {
+    navObserver.observe(section);
   });
+}
 
-  modalClose.addEventListener("click", closeInfoModal);
+// 9. Back-to-top button
+const backTop = $("#backTop");
 
-  infoModal.addEventListener("click", event => {
-    if (event.target === infoModal) closeInfoModal();
+function updateBackTop() {
+  backTop?.classList.toggle("visible", window.scrollY > 450);
+}
+
+window.addEventListener("scroll", updateBackTop, { passive: true });
+updateBackTop();
+
+backTop?.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
   });
-
-  // Gallery lightbox
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImage = document.getElementById("lightboxImage");
-  const lightboxClose = document.getElementById("lightboxClose");
-
-  document.querySelectorAll(".gallery-item").forEach(item => {
-    item.addEventListener("click", () => {
-      lightboxImage.src = item.dataset.image;
-      lightbox.classList.add("open");
-      lightbox.setAttribute("aria-hidden", "false");
-      lightboxClose.focus();
-    });
-  });
-
-  function closeLightbox() {
-    lightbox.classList.remove("open");
-    lightbox.setAttribute("aria-hidden", "true");
-  }
-
-  lightboxClose.addEventListener("click", closeLightbox);
-
-  lightbox.addEventListener("click", event => {
-    if (event.target === lightbox) closeLightbox();
-  });
-
-  // Keyboard support
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape") {
-      closeInfoModal();
-      closeLightbox();
-      navLinks.classList.remove("open");
-      menuToggle.textContent = "☰";
-    }
-  });
-
-  // Dive interaction
-  const diveButton = document.getElementById("diveButton");
-  const diveMessage = document.getElementById("diveMessage");
-  const messages = [
-    "عمق ۱۰۰ متر: نور خورشید آرام‌آرام محو می‌شود... 🌊",
-    "عمق ۵۰۰ متر: به دنیای آبی تیره‌تر خوش آمدی... 🪼",
-    "عمق ۱۰۰۰ متر: اینجا تاریکی و نورهای زیستی با هم می‌رقصند... ✨",
-    "اکتشاف آغاز شد! رازهای اقیانوس هنوز تمام نشده‌اند... 🐠"
-  ];
-
-  let diveIndex = 0;
-
-  diveButton.addEventListener("click", () => {
-    diveMessage.textContent = messages[diveIndex];
-    diveIndex = (diveIndex + 1) % messages.length;
-
-    diveButton.textContent = "ادامه اکتشاف ↓";
-
-    document.querySelector(".depth-banner").animate(
-      [
-        { boxShadow: "0 0 0 rgba(114,245,243,0)" },
-        { boxShadow: "0 0 45px rgba(114,245,243,.18)" },
-        { boxShadow: "0 0 0 rgba(114,245,243,0)" }
-      ],
-      { duration: 1000, easing: "ease-in-out" }
-    );
-  });
-
-  // Back to top
-  const backToTop = document.getElementById("backToTop");
-
-  window.addEventListener("scroll", () => {
-    backToTop.classList.toggle("visible", window.scrollY > 450);
-  }, { passive: true });
-
-  backToTop.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-
-  // Current year in footer
-  document.getElementById("year").textContent = new Date().getFullYear();
 });
+
+// 10. Automatic copyright year
+const year = $("#year");
+
+if (year) {
+  year.textContent = new Date().getFullYear();
+}
